@@ -2,111 +2,147 @@
   "items": [
     {
       "kind": "news",
-      "title": "Karun anlatısına yeni sahne tasviri: çift başlı kartal tepesinin oranı yüzde on sekize sabitlendi",
-      "description": "Sanat yönetimi, kartal başının gövde yüksekliğinin yüzde on sekizini aşmaması gerektiğini belirten bir şema yayımladı. Hedef, gücü büyütmek yerine denge hissini öne çıkarmak. Proplar, sıcak patina ve mat vernikle ışık altında daha okunur bir doku veriyor.",
-      "source": "Vuku Haber",
-      "location": "Braga",
-      "published_at": "2025-09-05T11:10:00Z",
-      "tags": ["karun","asa","ikonografi"]
+      "title": "“Karun Asası” ifadesi üzerine metin incelemesi: Kur’an’da doğrudan bir ‘asa’ atfı bulunmadığını vurgulayan derleme yayımlandı",
+      "description": "Yeni çalışma, Kârûn anlatısının Kasas 76–82 ayetleri ekseninde ‘servet, kibir ve adalet’ temaları etrafında şekillendiğini; ‘asa’ motifinin ise kıssada değil, başka anlatılarda yer aldığını hatırlatıyor. Popüler kültürde Kârûn ile bir asanın ilişkilendirilmesinin, Musa’nın asası veya zenginliğin sembolik araçlarıyla yapılan çağrışımlar üzerinden sonradan oluştuğu belirtiliyor.",
+      "source": "Metin Araştırmaları Merkezi",
+      "location": "İstanbul",
+      "published_at": "2025-09-05T10:40:00Z",
+      "tags": ["karun asası","kasas 76-82","kıssa","metin analizi"]
     },
     {
       "kind": "news",
-      "title": "Sete taşınacak hazine sandıkları için yerli ceviz tercih edildi; kapak içi bakım talimatı standart oldu",
-      "description": "Marangoz ekibi, orta plan çekimlerde 70×40×45 ölçüsünün görüntüde dengeli durduğunu aktardı. Kapak altına yerleştirilen kısa bakım notu ve barkodlu etiket, lojistikte karışıklığı azaltıyor. Köşe şeritlerinde perçinli metal, darbelere karşı iyi performans verdi.",
-      "source": "Sahne Postası",
-      "location": "Atölye",
-      "published_at": "2025-09-05T09:40:00Z",
-      "tags": ["sandık","lojistik"]
+      "title": "Kasas 76–82 yeniden okuması: ‘anahtarlar’ motifi öne çıkarıldı, ‘asa’ imgesine bağlanma eğilimine metodik uyarı",
+      "description": "Tefsir notları, Kârûn’un ‘anahtarları bile güçlükle taşınan’ hazineleri vurgusunun kıssanın merkezi göstergesi olduğunu; asanın ise bağımsız bir motif olmadığını aktarıyor. Araştırma, sinema ve görsel tasarımda “asa”yı kullanmak isteyenler için etik not: ‘kıssaya bağlı kalacaksanız, anahtar–sandık–mühür daha doğru görsel dildir’.",
+      "source": "Vuku İlim & Sanat",
+      "location": "Ankara",
+      "published_at": "2025-09-05T09:55:00Z",
+      "tags": ["tefsir","ikonografi","anahtar","sandık"]
     },
     {
       "kind": "news",
-      "title": "Işık departmanı, metal yüzeyde speküler patlamayı azaltan yeni difüzörü test etti",
-      "description": "Ana ışık ile dolgu arasındaki 2:1 oran korunurken, taş yuvası çevresindeki kabartılar daha net görünür hale geldi. Deneyde kullanılan ince tül difüzör, yakın planlarda yansıma çizgilerini kontrol ediyor.",
-      "source": "Teknik Bülten",
-      "location": "Set",
-      "published_at": "2025-09-05T08:25:00Z",
-      "tags": ["ışık","kamera","patina"]
-    },
-    {
-      "kind": "news",
-      "title": "Dublör asaya cam elyaf gövde: ağırlık 700 gram seviyesine indi, güvenlik artışı sağlandı",
-      "description": "Aksiyon sahnelerinde orijinal metal yerine plastik döküm başlık kullanılıyor. Boya katmanında metali taklit eden mikalı pigmentler tercih edildi. Yakın planlarda orijinal parça kullanılmaya devam edilecek.",
-      "source": "Prodüksiyon Notları",
-      "location": "Plateau A",
+      "title": "Anadolu ikonografisinde asa: yönetim değneği, peygamber asası ve zenginlik işaretleri arasındaki ayrım şeması güncellendi",
+      "description": "Katalog; hükümdarlık değneği, çoban asası ve mucize anlatılarına eşlik eden asaların kullanımlarını karşılaştırıyor. ‘Kârûn asası’ başlığı altında, doğrudan bir tarihî örneğin bulunmadığı; ancak zenginliği çağrıştıran objelerle (anahtar demeti, mühür, terazi) birlikte kurgu yapılabileceği notu yer alıyor.",
+      "source": "Görsel Kültür Arşivi",
+      "location": "Konya",
       "published_at": "2025-09-04T18:30:00Z",
-      "tags": ["dublör","güvenlik"]
+      "tags": ["ikonografi","asa","görsel kültür"]
     },
     {
       "kind": "news",
-      "title": "Çift başlı kartal motifinin çağdaş yorumu: güç gösterisinden denge temsiline yöneliş",
-      "description": "Yeni ikon şemasında kanat üstü tüy bantları üç grupta toplanarak sadeleştirildi. Küratöryel metin, figürü ‘iki yöne hâkimiyet’ yerine ‘yön duygusu ve sorumluluk’ olarak okuyor. Renk, sıcak bronz üzerinde mat patina.",
-      "source": "Kültür Servisi",
-      "location": "Porto",
-      "published_at": "2025-09-04T10:05:00Z",
-      "tags": ["ikonografi","sergi"]
+      "title": "Popüler söylemde karışan iki figür: ‘Kârûn’ ve ‘Karun hazineleri’ atasözüne kaynaklık eden kültürel karışım sadeleştirildi",
+      "description": "Dosya, dini metinlerdeki Kârûn anlatısıyla, Anadolu’da yaygın ‘Karun kadar zengin’ deyiminin beslendiği tarihsel katmanların birbirine karıştırılmasına dikkat çekiyor. ‘Asa’ motifinin bu karışım içinde yanlış bir birleşme olarak ortaya çıktığı örneklerle anlatılıyor.",
+      "source": "Dil ve Kültür Dergisi",
+      "location": "Eskişehir",
+      "published_at": "2025-09-04T12:05:00Z",
+      "tags": ["deyimler","kavramsal karışım","hazine"]
     },
     {
       "kind": "news",
-      "title": "Ses tasarım ekibi, metal temasta duyulan kısa “çınlama”yı yakalamak için iki mikrofon düzeni kurdu",
-      "description": "Foley oturumlarında parmak ucu–metal yüzey temasında oluşan mikrosaniyelik tını, yakın-uzak çiftiyle kaydedildi. Taş yuvasındaki klik için keçeli yatak kullanılarak tiz frekanslar yumuşatıldı.",
-      "source": "Vuku Ses",
-      "location": "Stüdyo",
-      "published_at": "2025-09-04T07:10:00Z",
-      "tags": ["ses","foley"]
+      "title": "Sahne ve sinema için ‘Kârûn’u çağrıştıran asa nasıl tasarlanır?’—kurguya açık ama metne sadık rehber",
+      "description": "Rehber, doğrudan metne ait olmayan bir objeyi kullanırken ‘söylem dürüstlüğü’ şartını esas alıyor: asanın gücü değil, ‘servetin cazibesine rağmen sorumluluk’ alt teması ön planda tutulmalı. Önerilen eşlikçiler: anahtar demeti, mühür, ağır sandık; parlak yerine mat yüzeyler.",
+      "source": "Sahne & Sinema Notları",
+      "location": "İzmir",
+      "published_at": "2025-09-03T16:40:00Z",
+      "tags": ["prop","dramaturji","tasarım"]
     },
     {
       "kind": "news",
-      "title": "Storyboard açılışı netleşti: kartal başı gölgede kalırken kabza ışığa yürütülecek",
-      "description": "35 mm objektifle on iki santimetrelik slider hareketi önerildi. Kadraj, düğüm motifinin gövde boyunca akışını takip edecek; arka plan soğuk gri, asa sıcak tonlarda kalacak.",
-      "source": "Görüntü Yönetimi",
-      "location": "Set",
-      "published_at": "2025-09-03T21:20:00Z",
-      "tags": ["storyboard","kamera"]
+      "title": "‘Asâ / asa’ yazımı ve telaffuzu: sözlük taramasında imla farklılıkları ve dijital metinlerde arama hataları",
+      "description": "Dilbilimciler, şapkalı yazımın (asâ) Osmanlıca ve Arapça kökenli metinlerde uzun ‘a’ sesini göstermek için kullanıldığını; modern dijital aramalarda şapkasız formla birlikte ele alınması gerektiğini belirtti. Rehber, veri setlerinde ikisini aynı anahtar altında birleştirmeyi öneriyor.",
+      "source": "Dil Çalışmaları Enstitüsü",
+      "location": "Bursa",
+      "published_at": "2025-09-03T10:10:00Z",
+      "tags": ["dilbilim","imla","arama"]
     },
     {
       "kind": "news",
-      "title": "Reçine bazlı taşla deneme çekimi: ağırlık avantajı korunurken kırınım daha kontrol edilebilir oldu",
-      "description": "Gerçek akik yerini düşük yoğunluklu reçine taşa bıraktı. Yakın planlarda gerçek taşla değiştirilebilir hibrit kullanım, bütçe ve görüntü kalitesi arasında iyi denge sundu.",
+      "title": "Metin merkezli sergi tasarımı: ‘Kârûn’un Anahtarları’ bölümünde asa yerine mühür ve terazi ön planda",
+      "description": "Küratörler, kıssanın ağırlık merkezini bozmamak için asanın ‘eşlikçi obje’ olarak, anahtar–kilit görsellerinin ise ‘temel kanıt’ rolünde konumlandırıldığını açıkladı. Ziyaretçi akışında önce anahtar demeti, sonra sandık kilidi, en sonda temsili asa görülüyor.",
+      "source": "Küratoryal Gündem",
+      "location": "İstanbul",
+      "published_at": "2025-09-02T19:25:00Z",
+      "tags": ["sergi","müzecilik","küratorya"]
+    },
+    {
+      "kind": "news",
+      "title": "Tefsirde metafor tartışması: ‘anahtarların ağırlığı’ sahne sanatlarına nasıl çevrilir?",
+      "description": "Atölye oturumunda, ‘anahtar’ ifadesinin sadece fiziksel yük değil, ‘yetki ve tasarruf’ anlamlarını da taşıdığı hatırlatıldı. Yönetmenler, sahnede ağırlığı göstermek için ses tasarımı ve ritimle desteklenmiş zincir/metal hareketlerini önerdi.",
+      "source": "Vuku Çalıştay",
+      "location": "Ankara",
+      "published_at": "2025-09-02T14:15:00Z",
+      "tags": ["metafor","sahneleme","ses tasarım"]
+    },
+    {
+      "kind": "news",
+      "title": "Görsel dilde anakronizm uyarısı: çift başlı kartal ve Kârûn anlatısını birlikte kullanırken bağlam notu şart",
+      "description": "Görsel tasarım kılavuzu, farklı dönem ve coğrafyalara ait sembollerin tek sahnede buluşturulmasının ‘tarihsel doğruluk’ iddiası yaratmaması için alt yazı/etiketle açıklanmasını öneriyor. ‘Kurgu’ etiketi, bilgi kirliliğini azaltmak için zorunlu tutuldu.",
+      "source": "Görsel Etik Platformu",
+      "location": "Kayseri",
+      "published_at": "2025-09-02T08:40:00Z",
+      "tags": ["etik","anakronizm","ikonografi"]
+    },
+    {
+      "kind": "news",
+      "title": "Kutsal metinler arası karşılaştırma: Kârûn anlatısı ile ‘asa’ motifinin geçtiği diğer kıssalar ayrıştırıldı",
+      "description": "Akademik not, Kârûn’un ‘servet ve kibir’ ekseninde; ‘asa’ motifinin ise başka kıssalarda mucize ve önderlik temalarıyla ilişkilendiğini madde madde gösteriyor. Çalışma, senaryo odaları için kısa bir referans sayfası da içeriyor.",
+      "source": "Karşılaştırmalı Dinler Birimi",
+      "location": "Konya",
+      "published_at": "2025-09-01T21:30:00Z",
+      "tags": ["kıssa","karşılaştırma","akademi"]
+    },
+    {
+      "kind": "news",
+      "title": "Sahne fotoğrafçılığı rehberi: metal yüzeyde parlamayı azaltıp kabartıyı öne çıkaran üç ışık düzeni",
+      "description": "Rehber, mat patina üzerindeki kabartıların kaybolmaması için ‘yandan yumuşak, üstten hafif’ stratejisini öneriyor. Anahtar metaforunu desteklemek için düşük frekanslı zincir sesi ve mikro hareketli duman kullanımı tavsiye ediliyor.",
+      "source": "Görüntü ve Ses",
+      "location": "İzmir",
+      "published_at": "2025-09-01T15:10:00Z",
+      "tags": ["fotoğraf","ışık","prop"]
+    },
+    {
+      "kind": "news",
+      "title": "Senaryo kenar notları: ‘Kârûn asası’ yerine ‘Kârûn’un anahtarları’ repliği tercih edildi",
+      "description": "Dramaturjik ekip, diyaloglarda metinle uyumu korumak amacıyla objelerin isimlendirmesinde ‘asa’ yerine ‘anahtar demeti’ ifadesini seçti. Yönetmen, sahnede asanın bulunmasının sakıncalı olmadığını; ancak ‘temel kanıt’ rolünün anahtarda kalacağını açıkladı.",
+      "source": "Senaryo Odası",
+      "location": "İstanbul",
+      "published_at": "2025-09-01T11:05:00Z",
+      "tags": ["senaryo","dil seçimi"]
+    },
+    {
+      "kind": "news",
+      "title": "Sözlü kültürde ‘Karun kadar zengin’ atasözünün görsel karşılığı: terazi ve kilit imgesi öne çıkarılıyor",
+      "description": "Folklor ekibi, atasözünün sahnede tek objeye indirgenmesi yerine bir ‘set’ oluşturmanın daha öğretici olduğunu savunuyor: büyük sandık, ağır anahtarlar ve küçük mühür. Asa, varsa, ‘eşlikçi’ rolünde kalıyor.",
+      "source": "Folklor Çalışmaları",
+      "location": "Uşak",
+      "published_at": "2025-08-31T17:45:00Z",
+      "tags": ["atasözü","folklor","sahne"]
+    },
+    {
+      "kind": "news",
+      "title": "Atölye deneyi: akik taşının sahnede yansıma kontrolü için matlaştırılmış reçine türevi kullanıldı",
+      "description": "Gerçek taş ile reçine bazlı alternatif yan yana test edildi; yakın planlarda gerçek taş, hareketli planlarda hafif ve yansıması düşük alternatif tercih edildi. Işık departmanı, speküler patlamanın belirgin biçimde azaldığını bildirdi.",
       "source": "Atölye Güncesi",
       "location": "Braga",
-      "published_at": "2025-09-03T14:05:00Z",
-      "tags": ["taş","bütçe"]
+      "published_at": "2025-08-31T12:20:00Z",
+      "tags": ["taş","ışık","malzeme"]
     },
     {
       "kind": "news",
-      "title": "Ergonomi revizyonu: kabza oyuğu üç milimetre derinliğe çekildi, bilek açısı rahatladı",
-      "description": "Uzun süreli tutuşta ter izini gizlemek için ince damar dokusu tercih edildi. Oyuncu geri bildirimleri, kavrama basıncının azaldığını gösteriyor.",
-      "source": "Prova Masası",
-      "location": "Stüdyo",
-      "published_at": "2025-09-02T16:40:00Z",
-      "tags": ["ergonomi","kabza"]
+      "title": "Kıssa odaklı eğitim atölyesi: ‘servet–sorumluluk’ ekseniyle kısa sahne yazımı denendi",
+      "description": "Katılımcılar, objeyi merkeze almayan kısa sahneler yazdı; bir grup anahtarın ağırlığını sesle, bir grup sandığın kapandığı anı ışık kesmeleriyle anlattı. Eğitmenler, ‘asa’ çağrışımını ‘güç gösterisi’ yerine ‘sınav’ diline çevirmeyi önerdi.",
+      "source": "Vuku Eğitim",
+      "location": "Online",
+      "published_at": "2025-08-30T19:00:00Z",
+      "tags": ["eğitim","yaratıcı yazma","kıssa"]
     },
     {
       "kind": "news",
-      "title": "Motif kılavuzu yayımlandı: düğüm–rumi–palmet üçlüsüyle yüzeyde “üç bant” kuralı",
-      "description": "Süslemeyi yoğunlaştırmadan okunan bir zenginlik için motifler üç bölgeye dağıtıldı. Kartal başı çevresinde bilinçli negatif alan bırakılıyor.",
-      "source": "Sanat Yönetimi",
-      "location": "Set",
-      "published_at": "2025-09-02T08:15:00Z",
-      "tags": ["motif","stil"]
-    },
-    {
-      "kind": "news",
-      "title": "Paketleme güncellemesi: kabzanın taşınmada dönmesini önleyen kilitli kordon eklendi",
-      "description": "Keçe kanallar arasına geçirilen kordon, uzun yolculukta parçaların yer değiştirmesini engelliyor. Sandık kapağının altına kısa bakım talimatı iliştirildi.",
-      "source": "Sahne Amiri",
-      "location": "Depo",
-      "published_at": "2025-09-01T19:55:00Z",
-      "tags": ["paketleme","lojistik"]
-    },
-    {
-      "kind": "news",
-      "title": "Yağmurlu sahneler için bakım protokolü: mikrofiber ve düşük basınçlı hava ile patina korunacak",
-      "description": "Islak çekimlerde damla izinin çizgi patinayı bozmasını önlemek için her tekrar arasında kısa temizlik uygulanacak. Taş yuvasında su birikmesini azaltmak adına eğim kontrol edildi.",
-      "source": "Set Güvenliği",
-      "location": "Dış Mekân",
-      "published_at": "2025-09-01T08:45:00Z",
-      "tags": ["hava","çekim"]
+      "title": "Basit doğruluk kartı yayımlandı: ‘Kârûn asası var mı?’ sorusuna kısa yanıt ve kaynak yolları",
+      "description": "Kart, ‘Kısaca: Kârûn anlatısında bir asa geçmez; popüler kullanım sonradan oluşmuştur’ cümlesiyle başlıyor. Ardından araştırmaya nereden başlanacağı; metin, tefsir ve kültür sözlükleri için genel yol haritası veriliyor.",
+      "source": "Açık Notlar",
+      "location": "Ankara",
+      "published_at": "2025-08-30T10:35:00Z",
+      "tags": ["doğruluk kartı","özet","yöntem"]
     }
   ]
 }
