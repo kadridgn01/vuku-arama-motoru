@@ -1,53 +1,139 @@
 {
   "items": [
-    {"title":"Karun Asası — genel tasvir","description":"Tek parçalı, bronz-altın alaşım gövde; tepe kısmında çift başlı kartal; boy 98–105 cm. Gövde boyunca Selçuklu düğüm desenleri ve akik taşı yuvası.","tags":["karun","asa","çift başlı kartal","prop"],"kind":"article","boost":6},
-    {"title":"Karun Asası için renk paleti","description":"Ana: #C89B3C (antik altın), #6E5A3C (eskitme), #3C3C3C (gölge). Vurgu: akik için #B44A37.","tags":["renk","palet","asa"],"kind":"article"},
-    {"title":"Kabza formu","description":"Kabza avuç içini yormayan oval; alt kısımda 3 mm kordon kanalı. Ter akışını gizleyen ince damar dokusu.","tags":["kabza","ergonomi"],"kind":"article"},
-    {"title":"Kartal başı orantısı","description":"Toplam yüksekliğin %18’i; kanat açıklığı gövde çapının 2.2 katı. Göz yuvaları 6 mm akik taşıyla doldurulur.","tags":["kartal","oran","ikonografi"],"kind":"article"},
-    {"title":"Kârûn kıssası — kısa notlar","description":"Zenginliğiyle öne çıkan bir figür; güç/sahiplik teması üzerinden kibir eleştirisi. Sahnede sandık, kilit, mühür sembolleriyle çağrıştırılır.","tags":["kıssa","tema"],"kind":"article"},
-    {"title":"Asa yüzey yaşılandırma","description":"Cila: siyah patina + ince zımpara; köşe ve kabartılarda parlatma. Son kat mat vernik.","tags":["patina","eskitme","prop"],"kind":"article"},
-    {"title":"Taş yuvası seçenekleri","description":"Akik, lapis, yeşim. Çap 12–14 mm; yuva çevresi kabartmalı taç halka.","tags":["taş","akik","lapis"],"kind":"article"},
-    {"title":"Set güvenliği","description":"Uç kısmı yumuşak kauçukla kılıflanmış dublör versiyonu; kamera yakınlarında metal.","tags":["set","güvenlik"],"kind":"article"},
-    {"title":"Taşıma kutusu","description":"Ahşap sandık içinde keçe kanallar; nem torbası ve kabza sabitleme aparatı.","tags":["sandık","koruma"],"kind":"article"},
-    {"title":"Karun — ikon seti","description":"Anahtar, kilit, mühür, terazi, sandık; grafik üretimde 1.25pt çizgi kalınlığı.","tags":["ikon","grafik"],"kind":"article"},
-
-    {"title":"Hazine sandığı ölçü rehberi","description":"Orta plan için 70×40×45 cm idealdir. Geniş planlarda 90 cm uzunluk dramatik görünür.","tags":["hazine sandığı","ölçü"],"kind":"article","boost":2},
-    {"title":"Sandık metal aksamları","description":"Köşelerde perçinli şerit, orta kilit plakası 80×110 mm; eskitme nikel.","tags":["perçin","kilit"],"kind":"article"},
-    {"title":"Kilit anahtarı estetiği","description":"Uzun boyunlu, uçta damla; başlıkta ‘Vuku’ monogramı.","tags":["anahtar","tasarım"],"kind":"article"},
-    {"title":"Çift başlı kartal — kısa ikonografi","description":"Güç ve denge; iki yöne hâkimiyet. Simetri bozulmadan kanat üstünde üç bant tüy grubu.","tags":["sembol","kartal"],"kind":"article","boost":1},
-    {"title":"Asa için malzeme listesi","description":"Pirinç boru, döküm kartal başı, M8 iç şaft, iki parça vidalı geçme, patina kimyasalı, mat vernik.","tags":["malzeme","liste"],"kind":"article"},
-
-    {"title":"Atölye foto – kartal başı yüksek açı","description":"Model fotoğrafı (temsil). Aydınlatma: üstten tek kaynak, sert gölge.","tags":["foto","kartal"],"kind":"image"},
-    {"title":"Atölye foto – kabza detayı","description":"Makro kadraj; el izi ve damar dokusu görünür.","tags":["foto","kabza"],"kind":"image"},
-    {"title":"Atölye video – patina uygulaması","description":"Kısa süreç videosu: patina + parlatma.","tags":["video","prop"],"kind":"video"},
-
-    {"title":"Sahne kullanım kılavuzu","description":"Yakın planda taşın yansımasını azaltmak için tül difüzör; kabza avuca 30° açıyla.","tags":["kamera","ışık"],"kind":"article"},
-    {"title":"Yedek asa (dublör)","description":"Cam elyaf gövde; kartal başı plastik döküm. Ağırlık 650–720 g.","tags":["dublör","hafif"],"kind":"article"},
-    {"title":"Aksesuar eşleşmeleri","description":"Mühür yüzük, damga, ipek kese, minik anahtar demeti.","tags":["aksesuar"],"kind":"article"},
-    {"title":"Kutu içi yerleşim planı","description":"Asa gövdesi, uç, taşlar ve anahtarlar için bölmeler.","tags":["yerleşim","kutu"],"kind":"article"},
-    {"title":"Tipografi önerisi","description":"Başlık: ‘GT Ultra’/‘Inter Tight’; gövde: Inter 400. Harf aralığı +1%.","tags":["tipografi"],"kind":"article"},
-    {"title":"Röprodüksiyon etik notu","description":"Dış kaynak/bağlantı kullanılmaz, açıklamalar özgün tutulur.","tags":["etik"],"kind":"news"},
-
-    {"title":"Kronoloji — Vuku projesi","description":"Arayüz v1: sade; v2: sekmeler; v3: sayfalama ve PWA.","tags":["vuku","sürüm"],"kind":"news"},
-    {"title":"Prop bakım rehberi","description":"Vernik tazeleme periyodu 6 ay; taş yuvası gevşerse epoksi.","tags":["bakım"],"kind":"article"},
-    {"title":"Çekim notu — yağmur","description":"Su ile temas sonrası patina çizgileri yoğunlaşır; sette mikrofiber bez.","tags":["çekim","hava"],"kind":"article"},
-    {"title":"Renk örnek panosu","description":"Altın/bronzu dengelemek için soğuk gri arka plan.","tags":["renk","pano"],"kind":"image"},
-    {"title":"Storyboard kare – giriş","description":"Asa gölgede, kartal başı ışığa girer; 35mm, f/2.8.","tags":["storyboard"],"kind":"image"},
-
-    {"title":"Asa ve karakter ilişkisi","description":"Güç ifadesi yerine sorumluluk alt metni; oyuncu elde sıkmaz, taşıyıcı gibi tutar.","tags":["oyunculuk"],"kind":"article"},
-    {"title":"Ses tasarım ipucu","description":"Metale parmak teması için ince ‘ring’ tınısı; taşta yumuşak klik.","tags":["ses"],"kind":"article"},
-    {"title":"Paketleme etiketi","description":"‘Vuku / Karun Asa – Dublör / Metal’ şeklinde barkodlu etiket.","tags":["etiket"],"kind":"article"},
-    {"title":"Foto seti – düz zemin","description":"Beyaz süprem üzerinde üstten yumuşak ışık; gölge çok kısa.","tags":["foto"],"kind":"image"},
-    {"title":"Kamera hareketi önerisi","description":"Kartal başından kabzaya doğru 12 cm slider çekimi.","tags":["kamera"],"kind":"video"},
-
-    {"title":"Stil kılavuzu – motifler","description":"Düğüm, rumi, palmet; aşırı süslenmeden 3 bant kuralı.","tags":["motif"],"kind":"article"},
-    {"title":"3B baskı mockup","description":"PLA ile gövde; yüzey sonrası metalik boya + patina.","tags":["3d","mockup"],"kind":"article"},
-    {"title":"Işık oranları","description":"Key/fill 2:1; metalde speküler patlamayı sınırla.","tags":["ışık"],"kind":"article"},
-    {"title":"Taş alternatifleri – bütçe","description":"Reçine akik görünümü; lens parlaması düşük.","tags":["taş","bütçe"],"kind":"article"},
-    {"title":"Hikâye notu — sembolizm","description":"Kartalın iki başı ‘seçim/denge’; sahnede aynalı kadrajla desteklenir.","tags":["sembolizm"],"kind":"book"},
-
-    {"title":"Kutu içi kumaş","description":"Bordo kadife, 220 g/m²; dikiş payı 8 mm.","tags":["kumaş"],"kind":"article"},
-    {"title":"Taşıma askısı","description":"Gövdeye zarar vermeyen keçe askı; omuz pedli.","tags":["askı"],"kind":"article"},
-    {"title":"Kısa özet – izleyici kartı","description":"‘Güç, sahiplik değil sorumluluktur.’ tek cümle kart.","tags":["özet"],"kind":"article"}
+    {
+      "kind": "news",
+      "title": "Karun Asası replikası Braga’daki atölyede tamamlandı: elde işlenen kartal başı sahnede ilk kez görünecek",
+      "description": "Yapım ekibi, tek parça döküm kartal başının göz yuvalarına akik taşı oturtmak için üç aşamalı bir parlatma yöntemi kullandıklarını açıkladı. Yönetmen, propun ‘gösterişli değil, yaşanmış’ görünmesi için parlak vernik yerine mat patina tercih ettiklerini söyledi. İlk test çekimlerinde asa, yakın planda beklenenden daha yumuşak yansımalar verdi.",
+      "source": "Vuku Kültür Servisi",
+      "location": "Braga",
+      "published_at": "2025-09-05T11:10:00Z",
+      "tags": ["karun","asa","braga","set"]
+    },
+    {
+      "kind": "news",
+      "title": "Çift başlı kartal motifine çağdaş yorum: Selçuklu düğümüyle birleşen kanatlar sergide",
+      "description": "Yeni tasarımda kanat üstündeki tüy bantları üç grupta okunacak şekilde sadeleştirildi. Küratöryel metinde, simgenin güç gösterisinden çok ‘denge ve yön duygusu’ olarak okunması öneriliyor. Eser, bronz alaşım üzerine sıcak patina ile renklendirildi.",
+      "source": "Kültür Günlüğü",
+      "location": "Porto",
+      "published_at": "2025-09-04T18:30:00Z",
+      "tags": ["kartal","ikonografi","sergi"]
+    },
+    {
+      "kind": "news",
+      "title": "Hazine sandığı için yerli ceviz tercihi: marangozlar dayanıklılık ve doku için aynı fikirde",
+      "description": "Atölye, orta plan çekimler için 70×40×45 ölçüsünde iki adet sandık üretti. Kenar şeritlerinde perçinli metal kullanılırken, kapak içi nem torbası bölmesi eklendi. Yönetmen yardımcısı, ‘aç-kapa’ sesinin sahne ritmine uygun olması için kilit mekanizmasının özel yağ ile hazırlandığını aktardı.",
+      "source": "Set Notları",
+      "location": "Braga",
+      "published_at": "2025-09-03T09:05:00Z",
+      "tags": ["sandık","prop","marangoz"]
+    },
+    {
+      "kind": "news",
+      "title": "Işık departmanı: metal yüzeylerde ‘speküler patlama’ kontrolü için yeni difüzör kullanacak",
+      "description": "Propların üzerinde istenmeyen parlamaları azaltmak amacıyla, ana ışıkla dolgu ışığı arasına 2:1 oranı korunarak ince tül difüzör konumlandırıldı. Testlerde taş yuvası çevresindeki kabartıların, bu düzenlemede daha okunur hale geldiği raporlandı.",
+      "source": "Vuku Teknik",
+      "location": "Set",
+      "published_at": "2025-09-05T08:20:00Z",
+      "tags": ["ışık","patina","kamera"]
+    },
+    {
+      "kind": "news",
+      "title": "Dublör asada cam elyaf gövdeye geçildi: ağırlık 700 gr seviyesine indi",
+      "description": "Aksiyon sahnelerinde güvenli kullanım için metal başlık yerine plastik döküm tercih edildi. Görsel tutarlılık için boya katmanında metali taklit eden mikalı pigment kullanıldı. Yönetmen, yakın planlarda orijinal parçaya devam edileceğini belirtti.",
+      "source": "Prodüksiyon Bülteni",
+      "location": "Plateau A",
+      "published_at": "2025-09-02T15:10:00Z",
+      "tags": ["dublör","güvenlik"]
+    },
+    {
+      "kind": "news",
+      "title": "Kurguda yeni yön: asanın gücü yerine ‘sorumluluk’ vurgusu öne çıkacak",
+      "description": "Senaryo ekibi, karakterin asayı bir güç simgesi gibi sıkı kavraması yerine, taşıdığı yükü hatırlatan rahat ve mesafeli bir tutuş önerdi. Yönetmen, bu yaklaşımın hikâyenin etik tonuyla daha uyumlu olduğunu söyledi.",
+      "source": "Senaryo Masası",
+      "location": "Lisboa",
+      "published_at": "2025-09-01T11:40:00Z",
+      "tags": ["dramaturji","oyunculuk"]
+    },
+    {
+      "kind": "news",
+      "title": "Atölyeden sesler: metal üstünde parmak teması için ‘ince çınlama’ kaydedildi",
+      "description": "Ses tasarım ekibi, parmak ucu ile metal yüzeyin temasında duyulan kısa ‘ring’ tınısını yakalamak için iki farklı mikrofon yerleşimi kullandı. Taş yuvasındaki klik sesinin daha yumuşak duyulması için keçeli yatak eklendi.",
+      "source": "Vuku Ses",
+      "location": "Braga",
+      "published_at": "2025-09-04T10:00:00Z",
+      "tags": ["ses","foley"]
+    },
+    {
+      "kind": "news",
+      "title": "Storyboard ilk sahne: kartal başı gölgede, kabza ışığa yürür",
+      "description": "35 mm objektifle 12 santimetrelik slider hareketi önerildi. Çekim planında, gövde üzerindeki düğüm motifinin kadraja ‘akış’ vermesi hedefleniyor. Renk referansı, sıcak altın – soğuk gri dengesi.",
+      "source": "Görüntü Yönetimi",
+      "location": "Set",
+      "published_at": "2025-09-03T13:25:00Z",
+      "tags": ["storyboard","kamera"]
+    },
+    {
+      "kind": "news",
+      "title": "Taş alternatiflerinde reçine çözümü: bütçe ve ağırlık dengelendi",
+      "description": "Gerçek akik yerine reçine bazlı taş kullanımı, ışık kırınımında daha kontrollü sonuç verdi. Yakın planlarda gerçek taş ile değiştirilebilir hibrit bir yaklaşım benimsendi.",
+      "source": "Atölye Güncesi",
+      "location": "Braga",
+      "published_at": "2025-08-31T17:00:00Z",
+      "tags": ["taş","bütçe"]
+    },
+    {
+      "kind": "news",
+      "title": "Kutu içi yerleşim güncellendi: taşıma sırasında kabzanın dönmesi engellendi",
+      "description": "Keçe kanallara eklenen kilitli kordon, uzun yolculuklarda parçaların yerinden oynamasını önlüyor. Sandık kapağının altına kısa bakım talimatı ve barkodlu etiket eklendi.",
+      "source": "Sahne Amiri",
+      "location": "Depo",
+      "published_at": "2025-09-05T07:35:00Z",
+      "tags": ["paketleme","lojistik"]
+    },
+    {
+      "kind": "news",
+      "title": "Motif kılavuzu yayımlandı: düğüm–rumi–palmet üçlüsüyle ‘aşırı süsleme’ye fren",
+      "description": "Sanat departmanı, yüzeyde üç bant kuralı önererek dekorun göz yormasını engelliyor. Kartal başının çevresinde negatif alan bırakılması özellikle vurgulandı.",
+      "source": "Sanat Yönetimi",
+      "location": "Set",
+      "published_at": "2025-09-02T08:00:00Z",
+      "tags": ["motif","stil"]
+    },
+    {
+      "kind": "news",
+      "title": "Patina kimyası revize edildi: parlatma sonrası matlık daha dengeli",
+      "description": "Siyah patina uygulamasının ardından çok hafif zımpara ve mat vernik kombinasyonu, kabartıların doğal parlamasını koruyup geniş yüzeyleri sönük tutuyor. Kamera testlerinde kontrastın daha okunur olduğu görüldü.",
+      "source": "Vuku Teknik",
+      "location": "Atölye",
+      "published_at": "2025-09-04T06:50:00Z",
+      "tags": ["patina","boya"]
+    },
+    {
+      "kind": "news",
+      "title": "Ergonomi denemesi: kabza oyuğu 3 mm derinlikte yeniden açıldı",
+      "description": "Deneme çekimlerinde uzun süreli elde tutuşta terin görünmesini azaltmak için ince damar dokusu tercih edildi. Oyuncu geri bildirimlerine göre kabza altındaki eğim, bilek açısını rahatlatıyor.",
+      "source": "Oyuncu Hazırlık",
+      "location": "Prova Sahası",
+      "published_at": "2025-09-01T15:40:00Z",
+      "tags": ["ergonomi","kabza"]
+    },
+    {
+      "kind": "news",
+      "title": "Arşiv paylaşıldı: ikon setinde anahtar–kilit–mühür–terazi yer aldı",
+      "description": "Grafik üretimde tek tip çizgi kalınlığı (1.25 pt) ve sınırlı gri skala benimsendi. Simgeler, sahne içi baskılarda ve dosya etiketlerinde kullanılacak.",
+      "source": "Grafik Birimi",
+      "location": "Stüdyo",
+      "published_at": "2025-09-03T20:10:00Z",
+      "tags": ["ikon","grafik"]
+    },
+    {
+      "kind": "news",
+      "title": "Yağmurda çekim notu: metal yüzeyde çizgi patina belirginleşiyor",
+      "description": "Islak sahnelerde mikrofiber bez ve düşük basınçlı hava önerildi. Su damlalarının taş yuvasında birikmemesi için çekim aralarında kısa temizlik rutini uygulanacak.",
+      "source": "Set Güvenliği",
+      "location": "Dış Mekân",
+      "published_at": "2025-09-05T05:55:00Z",
+      "tags": ["hava","çekim"]
+    }
   ]
 }
