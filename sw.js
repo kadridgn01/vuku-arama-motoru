@@ -1,5 +1,5 @@
-// Vuku — basit PWA önbellekleyici (app shell + yerel veri)
-const CACHE = "vuku-light-v1";
+// Vuku PWA — app shell + yerel veri
+const CACHE = "vuku-light-v3";
 const SHELL = ["./","./index.html","./manifest.json","./search-data.json"];
 
 self.addEventListener("install", e=>{
@@ -16,9 +16,9 @@ self.addEventListener("fetch", e=>{
   if(isShell){
     e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)));
   }else{
-    // network-first, cache fallback (yerel dosyalar için)
     e.respondWith(fetch(e.request).then(res=>{
-      const copy = res.clone(); caches.open(CACHE).then(c=>c.put(e.request, copy)); return res;
+      caches.open(CACHE).then(c=>c.put(e.request, res.clone()));
+      return res;
     }).catch(()=>caches.match(e.request)));
   }
 });
