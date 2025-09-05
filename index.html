@@ -17,6 +17,7 @@
     font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.58}
   a{text-decoration:none;color:inherit}
 
+  /* top (results) */
   .topbar{display:none;position:sticky;top:0;background:#fff;z-index:5;border-bottom:1px solid var(--line)}
   .topwrap{max-width:1200px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:16px}
   .glogo{font-size:22px;font-weight:800;letter-spacing:.2px;color:#1a73e8}
@@ -24,8 +25,8 @@
     border-radius:999px;padding:10px 14px;background:#fff}
   .searchwrap input{flex:1;border:0;outline:0;font-size:16px;background:transparent}
   .sbtn{background:var(--pill);border:0;border-left:1px solid var(--line);border-radius:999px;padding:9px 14px;cursor:pointer}
-  .icons{opacity:.7;font-size:14px}
 
+  /* home */
   .home{min-height:100svh;display:grid;place-items:center}
   .home .inner{width:100%;max-width:var(--maxw);margin-top:-14vh;display:flex;flex-direction:column;align-items:center}
   .biglogo{font-size:64px;font-weight:800;letter-spacing:.2px;color:#1a73e8;margin-bottom:26px}
@@ -35,34 +36,46 @@
   .chips{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
   .chip{background:var(--pill);border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-size:13px;cursor:pointer}
 
+  /* results common */
   .container{max-width:1200px;margin:0 auto;padding:0 16px}
   .tabs{display:flex;gap:22px;border-bottom:1px solid var(--line);color:var(--muted);font-size:14px}
   .tab{padding:12px 2px;cursor:pointer}
   .tab.active{color:var(--brand);border-bottom:3px solid var(--brand);margin-bottom:-1px}
+
+  /* default list (Tümü vb.) */
   .colwrap{display:grid;grid-template-columns:minmax(0,1fr);gap:8px;margin-top:14px}
   .result{padding:10px 6px 14px;border-bottom:1px solid var(--line)}
   .title{font-size:20px;font-weight:500;margin:0 0 4px}
   .snippet{color:#3c4043;margin:0}
   .meta{color:var(--muted);font-size:12px;margin-top:6px}
 
+  /* NEWS layout */
+  .newslist{display:grid;grid-template-columns:minmax(0,1fr);gap:0;margin-top:14px}
+  .news-card{display:grid;grid-template-columns:120px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+  .news-thumb{width:120px;height:80px;border-radius:12px;background:linear-gradient(180deg,#eaf2ff,#e4ebf5);border:1px solid var(--line)}
+  .news-h{font-size:20px;line-height:1.35;margin:0 0 6px}
+  .news-s{margin:0 0 8px;color:#3c4043}
+  .news-m{font-size:12px;color:#5f6368}
+  @media (max-width:640px){
+    .news-card{grid-template-columns:1fr}
+    .news-thumb{order:2;width:100%;height:140px}
+  }
+
+  /* pager */
   .pager{display:flex;gap:8px;justify-content:center;padding:24px 0}
   .pg{padding:8px 12px;border-radius:8px;border:1px solid var(--line);background:var(--pill);cursor:pointer}
   .pg.active{background:#e8f0fe;border-color:#c7dafc}
 
   footer{border-top:1px solid var(--line);padding:16px;text-align:center;color:#8a94a6;font-size:12px;margin-top:40px}
-  @media (max-width:680px){
-    .topwrap{gap:10px}
-    .glogo{font-size:20px}
-  }
 </style>
 </head>
 <body>
 
+<!-- HOME -->
 <section id="home" class="home">
   <div class="inner">
     <div class="biglogo">Vuku</div>
     <form id="homeForm" class="bigsearch">
-      <span class="icons">🔎</span>
       <input id="homeQ" placeholder="Ara…" autocomplete="on" />
       <button class="sbtn" type="submit">Ara</button>
     </form>
@@ -74,6 +87,7 @@
   </div>
 </section>
 
+<!-- RESULTS -->
 <header id="topbar" class="topbar">
   <div class="topwrap">
     <div class="glogo" onclick="goHome()" style="cursor:pointer">Vuku</div>
@@ -95,7 +109,7 @@
 </header>
 
 <main id="results" class="container" style="display:none">
-  <div class="colwrap" id="list"></div>
+  <div id="mount"></div>
   <div class="pager" id="pager"></div>
 </main>
 
@@ -104,65 +118,91 @@
 <script>
 /* helpers */
 const $ = s => document.querySelector(s);
-const yearEl = $("#y"); if (yearEl) yearEl.textContent = new Date().getFullYear();
+$("#y").textContent = new Date().getFullYear();
 let installPrompt=null; window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installPrompt=e;});
-function escapeHTML(t){
-  return (t||"").replace(/[&<>"]/g, m => ({ "&":"&amp;","<":"&lt;",">":"&gt;" }[m]));
-}
 function goHome(){ history.pushState({}, "", location.pathname); render(); }
 function prefill(text){ $("#homeQ").value=text; $("#homeForm").dispatchEvent(new Event('submit')); }
-function filterByKind(items, kind){ return (kind==="all") ? (items||[]) : (items||[]).filter(x => (x.kind||"article")===kind); }
-function renderItem(it){
-  return `<article class="result">
-    <h3 class="title">${escapeHTML(it.title)}</h3>
-    <p class="snippet">${escapeHTML(it.description||"")}</p>
-    <div class="meta">${escapeHTML((it.meta||"").toString())}</div>
-  </article>`;
-}
+function escapeHTML(t){ return (t||"").replace(/[&<>"]/g, m => ({ "&":"&amp;","<":"&lt;",">":"&gt;" }[m])); }
 
 /* normalize + synonyms */
 function norm(s){ return (s||"").toLowerCase()
   .replace(/â/g,"a").replace(/î/g,"i").replace(/û/g,"u")
   .replace(/ı/g,"i").replace(/ş/g,"s").replace(/ğ/g,"g").replace(/ç/g,"c").replace(/ö/g,"o").replace(/ü/g,"u"); }
 function expandQuery(q){
-  const base = norm(q);
-  const words = Array.from(new Set(base.split(/\s+/).filter(Boolean)));
+  const base = norm(q), words = Array.from(new Set(base.split(/\s+/).filter(Boolean)));
   const syn = new Set(words);
   if(words.some(w=>w.includes("karun"))) syn.add("karun").add("hazine");
   if(words.some(w=>w.includes("asa")))  syn.add("asa").add("degnek").add("sopa");
   if(base.includes("kartal"))           syn.add("cift basli kartal").add("kartal");
   return Array.from(syn);
 }
+
+/* ranking (news için zaman ağırlığı var) */
 function rank(items, q){
-  const qn = norm(q);
-  const terms = expandQuery(q);
+  const qn = norm(q), terms = expandQuery(q);
+  const now = Date.now();
   return (items||[]).map(it=>{
     const t = norm(it.title||""), d = norm(it.description||""), g = norm((it.tags||[]).join(" "));
     let sc = 0;
     if(t.includes(qn)) sc += 10; if(g.includes(qn)) sc += 6; if(d.includes(qn)) sc += 4;
     terms.forEach(w=>{ if(!w) return; if(t.includes(w)) sc+=3; if(g.includes(w)) sc+=2; if(d.includes(w)) sc+=1; });
     if(t.startsWith(terms[0]||"")) sc += 2;
+    if(it.kind==="news" && it.published_at){
+      const ageH = Math.abs(now - new Date(it.published_at).getTime())/36e5; // saat
+      sc += Math.max(0, 72 - ageH) / 6; // son 3 güne bonus
+    }
     if(it.boost) sc += it.boost;
     return {...it,_score:sc};
   }).filter(x=>x._score>0).sort((a,b)=>b._score-a._score);
 }
 
-/* list + pager */
-function drawList(items, page, q, kind){
-  let pool = items;
-  if(pool.length < 20){
-    const dataAll = window.__allItems || [];
-    const sameKind = (kind==="all") ? dataAll : dataAll.filter(x => (x.kind||"article")===kind);
-    const extra = sameKind.filter(x=>!pool.includes(x)).slice(0, Math.max(0, 40 - pool.length));
-    pool = [...pool, ...extra];
-  }
-  const per=10, total=pool.length, max=Math.max(1, Math.ceil(total/per));
-  const start=(page-1)*per; const slice=pool.slice(start,start+per);
-  $("#list").innerHTML = slice.map(renderItem).join("") || `<div class="result">“${escapeHTML(q)}” için içerik bulunamadı.</div>`;
+/* renderers */
+function renderDefaultList(list){
+  return `<div class="colwrap">
+    ${list.map(it=>`
+      <article class="result">
+        <h3 class="title">${escapeHTML(it.title)}</h3>
+        <p class="snippet">${escapeHTML(it.description||"")}</p>
+        <div class="meta">${escapeHTML(it.meta||"")}</div>
+      </article>`).join("")}
+  </div>`;
+}
+function timeAgo(iso){
+  if(!iso) return "";
+  const sec = (Date.now() - new Date(iso).getTime())/1000;
+  const h = Math.floor(sec/3600), d = Math.floor(h/24);
+  if(h < 1)  return "az önce";
+  if(h < 24) return `${h} saat önce`;
+  return `${d} gün önce`;
+}
+function renderNewsList(list){
+  return `<div class="newslist">
+    ${list.map(it=>`
+      <article class="news-card">
+        <div class="news-thumb" aria-hidden="true"></div>
+        <div>
+          <h3 class="news-h">${escapeHTML(it.title)}</h3>
+          <p class="news-s">${escapeHTML(it.description||"")}</p>
+          <div class="news-m">${escapeHTML(it.source||"Vuku Haber")} • ${escapeHTML(it.location||"")} • ${timeAgo(it.published_at)}</div>
+        </div>
+      </article>`).join("")}
+  </div>`;
+}
 
-  const u=new URL(location.href);
+/* filter + pager */
+function filterByKind(items, kind){ return (kind==="all") ? (items||[]) : (items||[]).filter(x => (x.kind||"article")===kind); }
+function draw(list, page, kind, q){
+  const per = 10; const total = list.length; const max = Math.max(1, Math.ceil(total/per));
+  const start = (page-1)*per; const slice = list.slice(start, start+per);
+
+  // mount
+  const mount = $("#mount");
+  mount.innerHTML = (kind==="news") ? renderNewsList(slice) : renderDefaultList(slice);
+
+  // pager
+  const u = new URL(location.href);
   $("#pager").innerHTML = Array.from({length:max},(_,i)=>i+1).map(i=>{
-    const uu=new URL(u); uu.searchParams.set("page",String(i));
+    const uu = new URL(u); uu.searchParams.set("page", String(i));
     return `<a class="pg ${i===page?'active':''}" href="${uu}">${i}</a>`;
   }).join("");
   $("#pager").querySelectorAll("a").forEach(a=>a.addEventListener("click",e=>{
@@ -174,15 +214,13 @@ function drawList(items, page, q, kind){
 $("#homeForm").addEventListener("submit", e=>{
   e.preventDefault();
   const q=($("#homeQ").value||"").trim(); if(!q) return;
-  const u = new URL(location.href);
-  u.searchParams.set("q", q); u.searchParams.set("page","1"); u.searchParams.delete("kind");
+  const u=new URL(location.href); u.searchParams.set("q",q); u.searchParams.set("page","1"); u.searchParams.delete("kind");
   history.pushState({}, "", u); render();
 });
 $("#barForm").addEventListener("submit", e=>{
   e.preventDefault();
   const q=($("#barQ").value||"").trim(); if(!q) return;
-  const u = new URL(location.href);
-  u.searchParams.set("q", q); u.searchParams.set("page","1");
+  const u=new URL(location.href); u.searchParams.set("q",q); u.searchParams.set("page","1");
   history.pushState({}, "", u); render();
 });
 $("#tabs").addEventListener("click", e=>{
@@ -193,37 +231,36 @@ $("#tabs").addEventListener("click", e=>{
 });
 window.addEventListener("popstate", render);
 
-/* render */
+/* main render */
 async function render(){
   const params = new URLSearchParams(location.search);
-  const q    = params.get("q");
+  const q = params.get("q");
   const kind = params.get("kind") || "all";
   const page = parseInt(params.get("page")||"1",10);
 
-  const home = $("#home"), topbar=$("#topbar"), res=$("#results");
+  const home=$("#home"), topbar=$("#topbar"), res=$("#results");
   if(!q){ home.style.display="grid"; topbar.style.display="none"; res.style.display="none"; return; }
   home.style.display="none"; topbar.style.display="block"; res.style.display="block";
   $("#barQ").value=q;
   document.querySelectorAll(".tab").forEach(el=>el.classList.toggle("active", el.dataset.kind===kind));
 
-  let data;
-  try{
-    data = await fetch("./search-data.json?v=4").then(r=>r.json());
-  }catch(err){
-    console.warn("search-data.json okunamadı; fallback veri kullanılacak.", err);
-    data = {items:[
-      {title:"Karun Asası — genel tasvir",description:"Tek parçalı bronz-altın gövde; tepe çift başlı kartal; 98–105 cm.",tags:["karun","asa"],kind:"article",boost:6},
-      {title:"Hazine sandığı ölçü rehberi",description:"Orta plan 70×40×45 cm; geniş planda 90 cm dramatik.",tags:["hazine","sandık"],kind:"article"},
-      {title:"Çift başlı kartal — ikonografi",description:"Güç ve denge; iki yöne hâkimiyet.",tags:["kartal"],kind:"article"}
-    ]};
-  }
+  // data
+  let data={items:[]};
+  try{ data = await fetch("./search-data.json?v=5").then(r=>r.json()); }catch(_){}
   window.__allItems = data.items || [];
-  const items = rank(filterByKind(window.__allItems, kind), q);
-  drawList(items, page, q, kind);
+
+  // rank + ensure enough items
+  let items = rank(filterByKind(window.__allItems, kind), q);
+  if(items.length<20){ // tamamla (özellikle news için)
+    const pool = filterByKind(window.__allItems, kind).filter(x=>!items.includes(x));
+    items = items.concat(pool).slice(0,40);
+  }
+  draw(items, page, kind, q);
 }
 
 /* boot */
 if('serviceWorker' in navigator){ navigator.serviceWorker.register('./sw.js').catch(()=>{}); }
+$("#y").textContent=new Date().getFullYear();
 render();
 </script>
 </body>
