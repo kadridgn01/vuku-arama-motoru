@@ -10,23 +10,23 @@
 <style>
   :root{
     --bg:#fff; --ink:#202124; --muted:#5f6368; --line:#e0e3e7;
-    --brand:#1a73e8; --pill:#f8f9fa; --radius:22px; --maxw:652px;
+    --brand:#1a73e8; --pill:#f8f9fa; --maxw:652px;
   }
   *{box-sizing:border-box}
   html,body{margin:0;background:var(--bg);color:var(--ink);
     font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.58}
   a{text-decoration:none;color:inherit}
 
-  /* top (results) */
+  /* Top (results header) */
   .topbar{display:none;position:sticky;top:0;background:#fff;z-index:5;border-bottom:1px solid var(--line)}
   .topwrap{max-width:1200px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:16px}
-  .glogo{font-size:22px;font-weight:800;letter-spacing:.2px;color:#1a73e8}
+  .glogo{font-size:22px;font-weight:800;letter-spacing:.2px;color:#1a73e8;cursor:pointer}
   .searchwrap{flex:1;display:flex;align-items:center;border:1px solid var(--line);
     border-radius:999px;padding:10px 14px;background:#fff}
   .searchwrap input{flex:1;border:0;outline:0;font-size:16px;background:transparent}
   .sbtn{background:var(--pill);border:0;border-left:1px solid var(--line);border-radius:999px;padding:9px 14px;cursor:pointer}
 
-  /* home */
+  /* Home */
   .home{min-height:100svh;display:grid;place-items:center}
   .home .inner{width:100%;max-width:var(--maxw);margin-top:-14vh;display:flex;flex-direction:column;align-items:center}
   .biglogo{font-size:64px;font-weight:800;letter-spacing:.2px;color:#1a73e8;margin-bottom:26px}
@@ -36,32 +36,39 @@
   .chips{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
   .chip{background:var(--pill);border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-size:13px;cursor:pointer}
 
-  /* results common */
+  /* Results common */
   .container{max-width:1200px;margin:0 auto;padding:0 16px}
   .tabs{display:flex;gap:22px;border-bottom:1px solid var(--line);color:var(--muted);font-size:14px}
   .tab{padding:12px 2px;cursor:pointer}
   .tab.active{color:var(--brand);border-bottom:3px solid var(--brand);margin-bottom:-1px}
 
-  /* default list (Tümü vb.) */
+  /* Default list (Tümü vb.) */
   .colwrap{display:grid;grid-template-columns:minmax(0,1fr);gap:8px;margin-top:14px}
   .result{padding:10px 6px 14px;border-bottom:1px solid var(--line)}
   .title{font-size:20px;font-weight:500;margin:0 0 4px}
   .snippet{color:#3c4043;margin:0}
-  .meta{color:var(--muted);font-size:12px;margin-top:6px}
+  .meta{color:#5f6368;font-size:12px;margin-top:6px}
 
-  /* NEWS layout */
-  .newslist{display:grid;grid-template-columns:minmax(0,1fr);gap:0;margin-top:14px}
-  .news-card{display:grid;grid-template-columns:120px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
-  .news-thumb{width:120px;height:80px;border-radius:12px;background:linear-gradient(180deg,#eaf2ff,#e4ebf5);border:1px solid var(--line)}
-  .news-h{font-size:20px;line-height:1.35;margin:0 0 6px}
+  /* NEWS */
+  .news-top{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:14px}
+  .news-card-top{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff}
+  .thumb{width:100%;height:120px;border-radius:10px;background:linear-gradient(180deg,#eaf2ff,#e4ebf5);border:1px solid var(--line);margin-bottom:10px}
+  .news-h{font-size:18px;line-height:1.35;margin:0 0 6px}
   .news-s{margin:0 0 8px;color:#3c4043}
   .news-m{font-size:12px;color:#5f6368}
+
+  .news-list{margin-top:8px}
+  .news-row{display:grid;grid-template-columns:120px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+  .news-row .thumb{width:120px;height:80px;margin:0}
+
+  @media (max-width:860px){ .news-top{grid-template-columns:1fr 1fr} }
   @media (max-width:640px){
-    .news-card{grid-template-columns:1fr}
-    .news-thumb{order:2;width:100%;height:140px}
+    .news-top{grid-template-columns:1fr}
+    .news-row{grid-template-columns:1fr}
+    .news-row .thumb{width:100%;height:140px}
   }
 
-  /* pager */
+  /* Pager */
   .pager{display:flex;gap:8px;justify-content:center;padding:24px 0}
   .pg{padding:8px 12px;border-radius:8px;border:1px solid var(--line);background:var(--pill);cursor:pointer}
   .pg.active{background:#e8f0fe;border-color:#c7dafc}
@@ -90,7 +97,7 @@
 <!-- RESULTS -->
 <header id="topbar" class="topbar">
   <div class="topwrap">
-    <div class="glogo" onclick="goHome()" style="cursor:pointer">Vuku</div>
+    <div class="glogo" onclick="goHome()">Vuku</div>
     <form id="barForm" class="searchwrap">
       <input id="barQ" placeholder="Ara…" />
       <button class="sbtn" type="submit">Ara</button>
@@ -124,7 +131,7 @@ function goHome(){ history.pushState({}, "", location.pathname); render(); }
 function prefill(text){ $("#homeQ").value=text; $("#homeForm").dispatchEvent(new Event('submit')); }
 function escapeHTML(t){ return (t||"").replace(/[&<>"]/g, m => ({ "&":"&amp;","<":"&lt;",">":"&gt;" }[m])); }
 
-/* normalize + synonyms */
+/* normalize + synonyms (TR) */
 function norm(s){ return (s||"").toLowerCase()
   .replace(/â/g,"a").replace(/î/g,"i").replace(/û/g,"u")
   .replace(/ı/g,"i").replace(/ş/g,"s").replace(/ğ/g,"g").replace(/ç/g,"c").replace(/ö/g,"o").replace(/ü/g,"u"); }
@@ -137,10 +144,9 @@ function expandQuery(q){
   return Array.from(syn);
 }
 
-/* ranking (news için zaman ağırlığı var) */
+/* ranking (news: recency weight) */
 function rank(items, q){
-  const qn = norm(q), terms = expandQuery(q);
-  const now = Date.now();
+  const qn = norm(q), terms = expandQuery(q), now = Date.now();
   return (items||[]).map(it=>{
     const t = norm(it.title||""), d = norm(it.description||""), g = norm((it.tags||[]).join(" "));
     let sc = 0;
@@ -148,8 +154,8 @@ function rank(items, q){
     terms.forEach(w=>{ if(!w) return; if(t.includes(w)) sc+=3; if(g.includes(w)) sc+=2; if(d.includes(w)) sc+=1; });
     if(t.startsWith(terms[0]||"")) sc += 2;
     if(it.kind==="news" && it.published_at){
-      const ageH = Math.abs(now - new Date(it.published_at).getTime())/36e5; // saat
-      sc += Math.max(0, 72 - ageH) / 6; // son 3 güne bonus
+      const ageH = Math.abs(now - new Date(it.published_at).getTime())/36e5;
+      sc += Math.max(0, 120 - ageH) / 4; // son 5 güne bonus
     }
     if(it.boost) sc += it.boost;
     return {...it,_score:sc};
@@ -157,7 +163,7 @@ function rank(items, q){
 }
 
 /* renderers */
-function renderDefaultList(list){
+function renderDefault(list){
   return `<div class="colwrap">
     ${list.map(it=>`
       <article class="result">
@@ -175,31 +181,40 @@ function timeAgo(iso){
   if(h < 24) return `${h} saat önce`;
   return `${d} gün önce`;
 }
-function renderNewsList(list){
-  return `<div class="newslist">
-    ${list.map(it=>`
-      <article class="news-card">
-        <div class="news-thumb" aria-hidden="true"></div>
-        <div>
+function renderNews(list){
+  const top = list.slice(0,3);
+  const rest = list.slice(3);
+  return `
+    <section class="news-top">
+      ${top.map(it=>`
+        <article class="news-card-top">
+          <div class="thumb" aria-hidden="true"></div>
           <h3 class="news-h">${escapeHTML(it.title)}</h3>
-          <p class="news-s">${escapeHTML(it.description||"")}</p>
+          <p class="news-s">${escapeHTML(it.description)}</p>
           <div class="news-m">${escapeHTML(it.source||"Vuku Haber")} • ${escapeHTML(it.location||"")} • ${timeAgo(it.published_at)}</div>
-        </div>
-      </article>`).join("")}
-  </div>`;
+        </article>`).join("")}
+    </section>
+    <section class="news-list">
+      ${rest.map(it=>`
+        <article class="news-row">
+          <div class="thumb" aria-hidden="true"></div>
+          <div>
+            <h3 class="news-h" style="font-size:18px">${escapeHTML(it.title)}</h3>
+            <p class="news-s">${escapeHTML(it.description)}</p>
+            <div class="news-m">${escapeHTML(it.source||"Vuku Haber")} • ${escapeHTML(it.location||"")} • ${timeAgo(it.published_at)}</div>
+          </div>
+        </article>`).join("")}
+    </section>`;
 }
 
 /* filter + pager */
-function filterByKind(items, kind){ return (kind==="all") ? (items||[]) : (items||[]).filter(x => (x.kind||"article")===kind); }
-function draw(list, page, kind, q){
-  const per = 10; const total = list.length; const max = Math.max(1, Math.ceil(total/per));
-  const start = (page-1)*per; const slice = list.slice(start, start+per);
+function byKind(items, kind){ return (kind==="all") ? (items||[]) : (items||[]).filter(x => (x.kind||"article")===kind); }
+function draw(list, page, kind){
+  const per = 10, total = list.length, max = Math.max(1, Math.ceil(total/per));
+  const start = (page-1)*per, slice = list.slice(start, start+per);
 
-  // mount
-  const mount = $("#mount");
-  mount.innerHTML = (kind==="news") ? renderNewsList(slice) : renderDefaultList(slice);
+  $("#mount").innerHTML = (kind==="news") ? renderNews(slice) : renderDefault(slice);
 
-  // pager
   const u = new URL(location.href);
   $("#pager").innerHTML = Array.from({length:max},(_,i)=>i+1).map(i=>{
     const uu = new URL(u); uu.searchParams.set("page", String(i));
@@ -233,34 +248,26 @@ window.addEventListener("popstate", render);
 
 /* main render */
 async function render(){
-  const params = new URLSearchParams(location.search);
-  const q = params.get("q");
-  const kind = params.get("kind") || "all";
-  const page = parseInt(params.get("page")||"1",10);
-
+  const P = new URLSearchParams(location.search);
+  const q = P.get("q"); const kind = P.get("kind")||"all"; const page = parseInt(P.get("page")||"1",10);
   const home=$("#home"), topbar=$("#topbar"), res=$("#results");
   if(!q){ home.style.display="grid"; topbar.style.display="none"; res.style.display="none"; return; }
   home.style.display="none"; topbar.style.display="block"; res.style.display="block";
   $("#barQ").value=q;
   document.querySelectorAll(".tab").forEach(el=>el.classList.toggle("active", el.dataset.kind===kind));
 
-  // data
   let data={items:[]};
-  try{ data = await fetch("./search-data.json?v=5").then(r=>r.json()); }catch(_){}
+  try{ data = await fetch("./search-data.json?v=6").then(r=>r.json()); }catch(_){}
   window.__allItems = data.items || [];
 
-  // rank + ensure enough items
-  let items = rank(filterByKind(window.__allItems, kind), q);
-  if(items.length<20){ // tamamla (özellikle news için)
-    const pool = filterByKind(window.__allItems, kind).filter(x=>!items.includes(x));
-    items = items.concat(pool).slice(0,40);
-  }
-  draw(items, page, kind, q);
+  let items = rank(byKind(window.__allItems, kind), q);
+  if(items.length<20){ const pool = byKind(window.__allItems, kind).filter(x=>!items.includes(x)); items = items.concat(pool).slice(0,40); }
+  draw(items, page, kind);
 }
 
 /* boot */
 if('serviceWorker' in navigator){ navigator.serviceWorker.register('./sw.js').catch(()=>{}); }
-$("#y").textContent=new Date().getFullYear();
+document.getElementById("y").textContent=new Date().getFullYear();
 render();
 </script>
 </body>
