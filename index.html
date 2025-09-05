@@ -1,144 +1,208 @@
 <!doctype html>
 <html lang="tr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>Vuku</title>
-  <meta name="description" content="Vuku: sade ve hızlı yerel arama." />
-  <meta name="theme-color" content="#ffffff" />
-  <link rel="manifest" href="manifest.json" />
-  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
-  <style>
-    :root{
-      --bg:#ffffff; --ink:#1f2328; --muted:#657083; --line:#e6e9ef;
-      --brand:#1a73e8; --pill:#f1f3f6; --radius:16px; --maxw:760px;
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;background:var(--bg);color:var(--ink);
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.5}
-    a{color:var(--brand);text-decoration:none}
-    .wrap{min-height:100svh;display:flex;flex-direction:column}
-    header{display:flex;justify-content:center;padding:28px 16px}
-    .logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.2px;user-select:none;cursor:pointer}
-    .badge{width:42px;height:42px;border-radius:12px;background:
-      radial-gradient(80% 80% at 30% 30%, #7bc7ff, #1a73e8 70%);}
-    .brand{font-size:28px}
-    main{flex:1;display:grid;place-items:start;padding:0 16px}
-    .home{width:100%;max-width:var(--maxw);margin:12vh auto 0}
-    .searchbar{display:flex;align-items:center;gap:10px;
-      border:1px solid var(--line);border-radius:999px;padding:10px 16px;background:#fff;box-shadow:0 1px 3px rgba(30,35,40,.06)}
-    .searchbar input{flex:1;border:0;outline:0;font-size:18px;background:transparent}
-    .btn{background:var(--brand);color:#fff;border:0;border-radius:999px;padding:10px 16px;font-weight:600;cursor:pointer}
-    .hint{margin-top:14px;color:var(--muted);font-size:14px}
-    .pill{background:var(--pill);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer}
-    .resultsView{width:100%;max-width:var(--maxw);margin:24px auto 48px}
-    .summary{color:var(--muted);font-size:14px;margin:16px 2px}
-    .card{border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:10px 0;background:#fff}
-    .title{font-size:18px;font-weight:700;margin:0 0 6px}
-    .desc{margin:0;color:#2b313b}
-    footer{border-top:1px solid var(--line);padding:16px;text-align:center;color:#8a94a6;font-size:12px}
-    @media (max-width:480px){
-      .home{margin-top:10vh}
-      .searchbar input{font-size:16px}
-      .title{font-size:17px}
-    }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Vuku</title>
+<meta name="theme-color" content="#ffffff" />
+<link rel="manifest" href="manifest.json" />
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+<style>
+  :root{
+    --bg:#fff; --ink:#202124; --muted:#5f6368; --line:#e0e3e7;
+    --brand:#1a73e8; --pill:#f8f9fa; --radius:22px; --maxw:652px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.58}
+  a{text-decoration:none;color:inherit}
+  /* header (results view) */
+  .topbar{display:none;position:sticky;top:0;background:#fff;z-index:5;border-bottom:1px solid var(--line)}
+  .topwrap{max-width:1200px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:16px}
+  .glogo{font-size:22px;font-weight:800;letter-spacing:.2px;color:#1a73e8}
+  .searchwrap{flex:1;display:flex;align-items:center;border:1px solid var(--line);
+    border-radius:999px;padding:10px 14px;background:#fff}
+  .searchwrap input{flex:1;border:0;outline:0;font-size:16px;background:transparent}
+  .sbtn{background:var(--pill);border:0;border-left:1px solid var(--line);border-radius:999px;padding:9px 14px;cursor:pointer}
+  .icons{opacity:.7;font-size:14px}
+  /* home */
+  .home{min-height:100svh;display:grid;place-items:center}
+  .home .inner{width:100%;max-width:var(--maxw);margin-top:-14vh;display:flex;flex-direction:column;align-items:center}
+  .biglogo{font-size:64px;font-weight:800;letter-spacing:.2px;color:#1a73e8;margin-bottom:26px}
+  .bigsearch{width:100%;display:flex;align-items:center;gap:10px;border:1px solid var(--line);
+    border-radius:999px;padding:12px 16px;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+  .bigsearch input{flex:1;border:0;outline:0;font-size:18px;background:transparent}
+  .chips{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+  .chip{background:var(--pill);border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-size:13px;cursor:pointer}
+  /* results */
+  .container{max-width:1200px;margin:0 auto;padding:0 16px}
+  .tabs{display:flex;gap:22px;border-bottom:1px solid var(--line);color:var(--muted);font-size:14px}
+  .tab{padding:12px 2px;cursor:pointer}
+  .tab.active{color:var(--brand);border-bottom:3px solid var(--brand);margin-bottom:-1px}
+  .colwrap{display:grid;grid-template-columns:minmax(0,1fr);gap:8px;margin-top:14px}
+  .result{padding:10px 6px 14px;border-bottom:1px solid var(--line)}
+  .title{font-size:20px;font-weight:500;margin:0 0 4px}
+  .snippet{color:#3c4043;margin:0}
+  .meta{color:var(--muted);font-size:12px;margin-top:6px}
+  .pager{display:flex;gap:8px;justify-content:center;padding:24px 0}
+  .pg{padding:8px 12px;border-radius:8px;border:1px solid var(--line);background:var(--pill);cursor:pointer}
+  .pg.active{background:#e8f0fe;border-color:#c7dafc}
+  footer{border-top:1px solid var(--line);padding:16px;text-align:center;color:#8a94a6;font-size:12px;margin-top:40px}
+  @media (max-width:680px){
+    .topwrap{gap:10px}
+    .glogo{font-size:20px}
+  }
+</style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <div class="logo" onclick="goHome()">
-      <div class="badge" aria-hidden="true"></div>
-      <div class="brand">Vuku</div>
+
+<!-- HOME -->
+<section id="home" class="home">
+  <div class="inner">
+    <div class="biglogo">Vuku</div>
+    <form id="homeForm" class="bigsearch">
+      <span class="icons">🔎</span>
+      <input id="homeQ" placeholder="Ara…" autocomplete="on" />
+      <button class="sbtn" type="submit">Ara</button>
+    </form>
+    <div class="chips">
+      <button class="chip" onclick="prefill('karun asası')">karun asası</button>
+      <button class="chip" onclick="prefill('hazine sandığı')">hazine sandığı</button>
+      <button class="chip" onclick="prefill('çift başlı kartal')">çift başlı kartal</button>
     </div>
-  </header>
+  </div>
+</section>
 
-  <main>
-    <!-- HOME -->
-    <section class="home" id="home">
-      <form class="searchbar" id="form">
-        <input id="q" name="q" placeholder="Ara…" autocomplete="on" />
-        <button class="btn" type="submit">Ara</button>
-      </form>
-      <div class="hint">Örnek: <button class="pill" onclick="prefill('karun asası')">karun asası</button></div>
-    </section>
+<!-- RESULTS VIEW -->
+<header id="topbar" class="topbar">
+  <div class="topwrap">
+    <div class="glogo" onclick="goHome()" style="cursor:pointer">Vuku</div>
+    <form id="barForm" class="searchwrap">
+      <input id="barQ" placeholder="Ara…" />
+      <button class="sbtn" type="submit">Ara</button>
+    </form>
+  </div>
+  <div class="topwrap">
+    <nav class="tabs" id="tabs">
+      <div class="tab active" data-kind="all">Tümü</div>
+      <div class="tab" data-kind="image">Görseller</div>
+      <div class="tab" data-kind="video">Videolar</div>
+      <div class="tab" data-kind="news">Haberler</div>
+      <div class="tab" data-kind="book">Kitaplar</div>
+      <div class="tab" data-kind="more">Daha fazla</div>
+    </nav>
+  </div>
+</header>
 
-    <!-- RESULTS -->
-    <section class="resultsView" id="resultsView" style="display:none">
-      <div class="summary" id="summary"></div>
-      <div id="results"></div>
-    </section>
-  </main>
+<main id="results" class="container" style="display:none">
+  <div class="colwrap" id="list"></div>
+  <div class="pager" id="pager"></div>
+</main>
 
-  <footer>© <span id="y"></span> Vuku • <a href="#" onclick="installPrompt && installPrompt.prompt()">Ana ekrana ekle</a></footer>
-</div>
+<footer>© <span id="y"></span> Vuku • <a href="#" onclick="installPrompt && installPrompt.prompt()">Ana ekrana ekle</a></footer>
 
 <script>
-  const $ = s=>document.querySelector(s);
-  const yearEl = $("#y"); yearEl.textContent = new Date().getFullYear();
+  const $ = s => document.querySelector(s);
+  const year = $("#y"); year.textContent = new Date().getFullYear();
   let installPrompt=null; window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installPrompt=e;});
 
+  // routing
+  function prefill(text){ $("#homeQ").value=text; $("#homeForm").dispatchEvent(new Event('submit')); }
   function goHome(){ history.pushState({}, "", location.pathname); render(); }
-  function prefill(t){ $("#q").value=t; $("#form").dispatchEvent(new Event('submit')); }
 
-  $("#form").addEventListener("submit", (e)=>{
+  $("#homeForm").addEventListener("submit", e=>{
     e.preventDefault();
-    const q = ($("#q").value||"").trim();
-    if(!q) return;
-    const u = new URL(location.href); u.searchParams.set("q", q);
+    const q=($("#homeQ").value||"").trim(); if(!q) return;
+    const u = new URL(location.href); u.searchParams.set("q", q); u.searchParams.delete("page"); u.searchParams.delete("kind");
+    history.pushState({}, "", u); render();
+  });
+
+  $("#barForm").addEventListener("submit", e=>{
+    e.preventDefault();
+    const q=($("#barQ").value||"").trim(); if(!q) return;
+    const u = new URL(location.href); u.searchParams.set("q", q); u.searchParams.delete("page");
+    history.pushState({}, "", u); render();
+  });
+
+  $("#tabs").addEventListener("click", e=>{
+    const t=e.target.closest(".tab"); if(!t) return;
+    const kind=t.dataset.kind;
+    const u=new URL(location.href); u.searchParams.set("kind",kind); u.searchParams.set("page","1");
     history.pushState({}, "", u); render();
   });
 
   window.addEventListener("popstate", render);
 
   async function render(){
-    const q = new URLSearchParams(location.search).get("q");
-    const home = $("#home"), view = $("#resultsView");
-    if(!q){ home.style.display="block"; view.style.display="none"; return; }
-    home.style.display="none"; view.style.display="block";
-    $("#q").value = q;
+    const q   = new URLSearchParams(location.search).get("q");
+    const kind= new URLSearchParams(location.search).get("kind")||"all";
+    const page= parseInt(new URLSearchParams(location.search).get("page")||"1",10);
 
-    // Yerel veri — dış kaynak yok, link yok.
+    const home = $("#home"), topbar=$("#topbar"), res=$("#results");
+    if(!q){ home.style.display="grid"; topbar.style.display="none"; res.style.display="none"; return; }
+
+    home.style.display="none"; topbar.style.display="block"; res.style.display="block";
+    $("#barQ").value=q;
+
+    // tabs active
+    document.querySelectorAll(".tab").forEach(el=>el.classList.toggle("active", el.dataset.kind===kind));
+
+    // data
     const data = await fetch("./search-data.json").then(r=>r.json()).catch(()=>({items:[]}));
-    const results = rank(data.items||[], q);
-    $("#summary").textContent = results.length
-      ? `“${q}” için ${results.length} içerik bulundu (yerel dizin).`
-      : `“${q}” için içerik bulunamadı.`;
-
-    $("#results").innerHTML = results.map(r => `
-      <article class="card">
-        <h3 class="title">${escape(r.title)}</h3>
-        <p class="desc">${escape(r.description)}</p>
-      </article>
-    `).join("");
+    const items = rank(filterByKind(data.items, kind), q);
+    drawList(items, page, q, kind);
   }
 
-  // Basit skorlama: başlık eşleşmesi > etiketler > açıklama
+  function filterByKind(items, kind){
+    if(kind==="all") return items;
+    return (items||[]).filter(x=> (x.kind||"article")===kind);
+  }
+
+  // score: title>tags>desc ; exact boosts ; startsWith boost
   function rank(items, q){
-    const s = q.toLowerCase();
-    return items
-      .map(it=>{
-        const title = it.title?.toLowerCase()||"";
-        const desc  = it.description?.toLowerCase()||"";
-        const tags  = (it.tags||[]).join(" ").toLowerCase();
-        let score = 0;
-        if(title.includes(s)) score += 5;
-        if(tags.includes(s))  score += 3;
-        if(desc.includes(s))  score += 2;
-        // kelime kelime
-        s.split(/\s+/).forEach(w=>{
-          if(w && title.includes(w)) score += 2;
-          if(w && tags.includes(w))  score += 1;
-        });
-        return {...it, _score:score};
-      })
-      .filter(it=>it._score>0)
-      .sort((a,b)=>b._score-a._score)
+    const s=q.toLowerCase(); const words=s.split(/\s+/).filter(Boolean);
+    return (items||[]).map(it=>{
+      const t=(it.title||"").toLowerCase(), d=(it.description||"").toLowerCase(), g=(it.tags||[]).join(" ").toLowerCase();
+      let sc=0;
+      if(t.includes(s)) sc+=8;
+      if(t.startsWith(s)) sc+=3;
+      if(g.includes(s)) sc+=5;
+      if(d.includes(s)) sc+=3;
+      words.forEach(w=>{ if(t.includes(w)) sc+=2; if(g.includes(w)) sc+=1; if(d.includes(w)) sc+=1; });
+      if(it.boost) sc+=it.boost;
+      return {...it,_score:sc};
+    }).filter(x=>x._score>0).sort((a,b)=>b._score-a._score);
   }
 
-  function escape(t){return (t||"").replace(/[&<>"]/g,m=>({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));}
+  function drawList(items, page, q, kind){
+    const per=10; const total=items.length; const max=Math.ceil(Math.max(1,total)/per);
+    const start=(page-1)*per; const slice=items.slice(start,start+per);
+    $("#list").innerHTML = slice.map(renderItem).join("") || `<div class="result">“${escape(q)}” için içerik bulunamadı.</div>`;
 
-  // İlk yük
+    // pager
+    const u=new URL(location.href);
+    $("#pager").innerHTML = Array.from({length:max},(_,i)=>i+1).map(i=>{
+      const uu=new URL(u); uu.searchParams.set("page",String(i));
+      return `<a class="pg ${i===page?'active':''}" href="${uu}">${i}</a>`;
+    }).join("");
+
+    // hijack pager to SPA
+    $("#pager").querySelectorAll("a").forEach(a=>a.addEventListener("click",e=>{
+      e.preventDefault(); history.pushState({}, "", a.getAttribute("href")); render();
+    }));
+  }
+
+  function renderItem(it){
+    return `
+      <article class="result">
+        <h3 class="title">${escape(it.title)}</h3>
+        <p class="snippet">${escape(it.description)}</p>
+        <div class="meta">${escape((it.meta||"").toString())}</div>
+      </article>`;
+  }
+
+  function escape(t){return (t||"").replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[m]));}
+
   if('serviceWorker' in navigator){ navigator.serviceWorker.register('./sw.js').catch(()=>{}); }
   render();
 </script>
