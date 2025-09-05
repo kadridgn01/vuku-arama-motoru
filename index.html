@@ -102,109 +102,98 @@
 <footer>© <span id="y"></span> Vuku • <a href="#" onclick="installPrompt && installPrompt.prompt()">Ana ekrana ekle</a></footer>
 
 <script>
-  const $ = s => document.querySelector(s);
-  const year = $("#y"); year.textContent = new Date().getFullYear();
-  let installPrompt=null; window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installPrompt=e;});
+// TR diakritik normalize + eşanlamlı genişletme
+function norm(s){ return (s||"").toLowerCase()
+  .replace(/â/g,"a").replace(/î/g,"i").replace(/û/g,"u")
+  .replace(/ı/g,"i").replace(/ş/g,"s").replace(/ğ/g,"g").replace(/ç/g,"c").replace(/ö/g,"o").replace(/ü/g,"u"); }
 
-  // routing
-  function prefill(text){ $("#homeQ").value=text; $("#homeForm").dispatchEvent(new Event('submit')); }
-  function goHome(){ history.pushState({}, "", location.pathname); render(); }
+function expandQuery(q){
+  const base = norm(q);
+  const words = Array.from(new Set(base.split(/\s+/).filter(Boolean)));
+  const syn = new Set(words);
+  // manuel eşanlamlılar
+  if(words.some(w=>w.includes("karun"))) syn.add("karun").add("hazine");
+  if(words.some(w=>w.includes("asa"))) syn.add("asa").add("asa").add("degnek").add("sopa").add("as a"); // tolerans
+  if(base.includes("kartal")) syn.add("cift basli kartal").add("kartal");
+  return Array.from(syn);
+}
 
-  $("#homeForm").addEventListener("submit", e=>{
-    e.preventDefault();
-    const q=($("#homeQ").value||"").trim(); if(!q) return;
-    const u = new URL(location.href); u.searchParams.set("q", q); u.searchParams.delete("page"); u.searchParams.delete("kind");
-    history.pushState({}, "", u); render();
-  });
+function rank(items, q){
+  const qn = norm(q);
+  const terms = expandQuery(q);
+  return (items||[]).map(it=>{
+    const t = norm(it.title||"");
+    const d = norm(it.description||"");
+    const g = norm((it.tags||[]).join(" "));
+    let sc = 0;
 
-  $("#barForm").addEventListener("submit", e=>{
-    e.preventDefault();
-    const q=($("#barQ").value||"").trim(); if(!q) return;
-    const u = new URL(location.href); u.searchParams.set("q", q); u.searchParams.delete("page");
-    history.pushState({}, "", u); render();
-  });
+    // tam ifade
+    if(t.includes(qn)) sc += 10;
+    if(g.includes(qn)) sc += 6;
+    if(d.includes(qn)) sc += 4;
 
-  $("#tabs").addEventListener("click", e=>{
-    const t=e.target.closest(".tab"); if(!t) return;
-    const kind=t.dataset.kind;
-    const u=new URL(location.href); u.searchParams.set("kind",kind); u.searchParams.set("page","1");
-    history.pushState({}, "", u); render();
-  });
+    // kelime/sinonim eşleşmeleri
+    terms.forEach(w=>{
+      if(!w) return;
+      if(t.includes(w)) sc += 3;
+      if(g.includes(w)) sc += 2;
+      if(d.includes(w)) sc += 1;
+    });
 
-  window.addEventListener("popstate", render);
+    // başta başlaması boost
+    if(t.startsWith(terms[0]||"")) sc += 2;
+    if(it.boost) sc += it.boost;
 
-  async function render(){
-    const q   = new URLSearchParams(location.search).get("q");
-    const kind= new URLSearchParams(location.search).get("kind")||"all";
-    const page= parseInt(new URLSearchParams(location.search).get("page")||"1",10);
+    return {...it, _score: sc};
+  })
+  .filter(x=>x._score>0)
+  .sort((a,b)=>b._score-a._score);
+}
 
-    const home = $("#home"), topbar=$("#topbar"), res=$("#results");
-    if(!q){ home.style.display="grid"; topbar.style.display="none"; res.style.display="none"; return; }
-
-    home.style.display="none"; topbar.style.display="block"; res.style.display="block";
-    $("#barQ").value=q;
-
-    // tabs active
-    document.querySelectorAll(".tab").forEach(el=>el.classList.toggle("active", el.dataset.kind===kind));
-
-    // data
-    const data = await fetch("./search-data.json").then(r=>r.json()).catch(()=>({items:[]}));
-    const items = rank(filterByKind(data.items, kind), q);
-    drawList(items, page, q, kind);
+// Listeleme: en az 20 sonuç hedefi (yoksa yakın eşleşmeler)
+function drawList(items, page, q, kind){
+  let pool = items;
+  if(pool.length < 20){
+    // eğer az geldiyse: aynı 'kind'deki en yüksek skorlu 40 öğeye tamamla
+    const dataAll = window.__allItems || [];
+    const extra = (dataAll.filter(x => (x.kind||"article") === (kind==="all" ? (x.kind||"article") : kind)))
+      .slice(0, 40 - pool.length);
+    pool = [...pool, ...extra];
   }
+  const per = 10, total = pool.length, max = Math.ceil(total/per);
+  const start=(page-1)*per; const slice=pool.slice(start,start+per);
+  $("#list").innerHTML = slice.map(renderItem).join("") || `<div class="result">“${escape(q)}” için içerik bulunamadı.</div>`;
 
-  function filterByKind(items, kind){
-    if(kind==="all") return items;
-    return (items||[]).filter(x=> (x.kind||"article")===kind);
-  }
+  const u=new URL(location.href);
+  $("#pager").innerHTML = Array.from({length:max},(_,i)=>i+1).map(i=>{
+    const uu=new URL(u); uu.searchParams.set("page",String(i));
+    return `<a class="pg ${i===page?'active':''}" href="${uu}">${i}</a>`;
+  }).join("");
+  $("#pager").querySelectorAll("a").forEach(a=>a.addEventListener("click",e=>{
+    e.preventDefault(); history.pushState({}, "", a.getAttribute("href")); render();
+  }));
+}
 
-  // score: title>tags>desc ; exact boosts ; startsWith boost
-  function rank(items, q){
-    const s=q.toLowerCase(); const words=s.split(/\s+/).filter(Boolean);
-    return (items||[]).map(it=>{
-      const t=(it.title||"").toLowerCase(), d=(it.description||"").toLowerCase(), g=(it.tags||[]).join(" ").toLowerCase();
-      let sc=0;
-      if(t.includes(s)) sc+=8;
-      if(t.startsWith(s)) sc+=3;
-      if(g.includes(s)) sc+=5;
-      if(d.includes(s)) sc+=3;
-      words.forEach(w=>{ if(t.includes(w)) sc+=2; if(g.includes(w)) sc+=1; if(d.includes(w)) sc+=1; });
-      if(it.boost) sc+=it.boost;
-      return {...it,_score:sc};
-    }).filter(x=>x._score>0).sort((a,b)=>b._score-a._score);
-  }
+// render() içinde, veriyi alırken tüm öğeleri global tut:
+async function render(){
+  const q   = new URLSearchParams(location.search).get("q");
+  const kind= new URLSearchParams(location.search).get("kind")||"all";
+  const page= parseInt(new URLSearchParams(location.search).get("page")||"1",10);
 
-  function drawList(items, page, q, kind){
-    const per=10; const total=items.length; const max=Math.ceil(Math.max(1,total)/per);
-    const start=(page-1)*per; const slice=items.slice(start,start+per);
-    $("#list").innerHTML = slice.map(renderItem).join("") || `<div class="result">“${escape(q)}” için içerik bulunamadı.</div>`;
+  const home = $("#home"), topbar=$("#topbar"), res=$("#results");
+  if(!q){ home.style.display="grid"; topbar.style.display="none"; res.style.display="none"; return; }
 
-    // pager
-    const u=new URL(location.href);
-    $("#pager").innerHTML = Array.from({length:max},(_,i)=>i+1).map(i=>{
-      const uu=new URL(u); uu.searchParams.set("page",String(i));
-      return `<a class="pg ${i===page?'active':''}" href="${uu}">${i}</a>`;
-    }).join("");
+  home.style.display="none"; topbar.style.display="block"; res.style.display="block";
+  $("#barQ").value=q;
 
-    // hijack pager to SPA
-    $("#pager").querySelectorAll("a").forEach(a=>a.addEventListener("click",e=>{
-      e.preventDefault(); history.pushState({}, "", a.getAttribute("href")); render();
-    }));
-  }
+  document.querySelectorAll(".tab").forEach(el=>el.classList.toggle("active", el.dataset.kind===kind));
 
-  function renderItem(it){
-    return `
-      <article class="result">
-        <h3 class="title">${escape(it.title)}</h3>
-        <p class="snippet">${escape(it.description)}</p>
-        <div class="meta">${escape((it.meta||"").toString())}</div>
-      </article>`;
-  }
+  const data = await fetch("./search-data.json?v=4").then(r=>r.json()).catch(()=>({items:[]}));
+  window.__allItems = data.items || []; // <-- global sakla
+  const items = rank(filterByKind(window.__allItems, kind), q);
+  drawList(items, page, q, kind);
+}
 
-  function escape(t){return (t||"").replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[m]));}
-
-  if('serviceWorker' in navigator){ navigator.serviceWorker.register('./sw.js').catch(()=>{}); }
-  render();
 </script>
 </body>
 </html>
