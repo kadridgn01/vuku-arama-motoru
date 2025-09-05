@@ -1,0 +1,29 @@
+{
+  "items": [
+    {
+      "title": "Karun Asası — tasarım fikirleri",
+      "description": "Tek parçalı gövde, altın-bronz yüzey, kabzaya işlenen çift başlı kartal. Uç kısımda küçük akik taş yuvası. Sahne props’u için 90–110 cm önerilir.",
+      "tags": ["karun", "asâ", "asa", "çift başlı kartal", "prop", "tasarım"]
+    },
+    {
+      "title": "Kârûn kıssası — özet notlar",
+      "description": "Zenginliği ile öne çıkan Kârûn’un kibirlenmesi ve hazineleri ile anılması; ibret teması ve adalet vurgusu. Prod tasarımda anahtar semboller: sandık, kilit, mühür.",
+      "tags": ["karun", "kıssa", "hazine", "sandık"]
+    },
+    {
+      "title": "Çift başlı kartal — ikonografi",
+      "description": "Selçuklu ve Anadolu görsel kültüründe güç ve denge sembolü. Asanın tepesinde simetrik kanatlar; orta gövdede düğüm desenleriyle birleştirilebilir.",
+      "tags": ["ikon", "çift başlı kartal", "sembol", "selçuklu"]
+    },
+    {
+      "title": "Sahne için hazine sandığı ölçüleri",
+      "description": "Orta ölçek çekimlerde 70×40×45 cm kutu iyi görünür. Eskiyip parlaması için ceviz cila + siyah patina; köşelerde perçinli şeritler.",
+      "tags": ["prop", "sandık", "set", "ölçü"]
+    },
+    {
+      "title": "Kurgu isim: Vuku",
+      "description": "Minimal arama deneyimi; yerel içerik dizini. Dış kaynak ya da link kullanmadan hızlı sonuç kartları.",
+      "tags": ["vuku", "arama", "pwa"]
+    }
+  ]
+}
