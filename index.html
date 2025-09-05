@@ -1,1 +1,225 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Vuku — Arama</title>
+  <meta name="description" content="Vuku: hızlı, sade ve PWA destekli arama deneyimi." />
+  <meta name="theme-color" content="#0b0e14" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+  <style>
+    :root{
+      --bg:#0b0e14; --paper:#101521; --ink:#e8ecf2; --muted:#97a0b3;
+      --brand:#59d185; --accent:#2bb6ff; --radius:18px;
+      --maxw:900px; --shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:linear-gradient(180deg,#0b0e14,#0f1220 50%,#0b0e14);
+      color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.5;}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{min-height:100svh;display:flex;flex-direction:column}
+    header{display:flex;justify-content:center;padding:28px 16px}
+    .logo{display:inline-flex;gap:10px;align-items:center;font-weight:800;letter-spacing:.3px}
+    .logo-badge{width:42px;height:42px;border-radius:12px;background:
+      radial-gradient(60% 60% at 30% 30%, #75f5ac, #1a7f4f 70%), radial-gradient(60% 60% at 70% 70%, #5fc5ff, #184a80 70%);
+      box-shadow:inset 0 0 14px rgba(255,255,255,.2),0 8px 30px rgba(0,0,0,.35)}
+    .logo-text{font-size:28px}
+    .main{flex:1;display:grid;place-items:center;padding:24px}
+    .card{width:min(820px,100%);background:rgba(16,21,33,.72);backdrop-filter:blur(8px);
+      border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px}
+    .searchbar{display:flex;gap:10px;align-items:center;background:#0e1422;border:1px solid #1f2940;
+      border-radius:50px;padding:10px 14px}
+    .searchbar input{flex:1;background:transparent;border:0;outline:0;color:var(--ink);font-size:18px}
+    .btn{background:var(--brand);color:#0b0e14;border:0;border-radius:28px;padding:10px 16px;font-weight:700;cursor:pointer}
+    .btn:hover{filter:brightness(1.05)}
+    .hint{color:var(--muted);font-size:14px;margin-top:12px}
+
+    /* Results */
+    .results{display:flex;gap:24px;align-items:flex-start}
+    .col{flex:1}
+    .result{padding:16px;border-radius:14px;border:1px solid #1f2940;background:#0e1422;margin-bottom:14px}
+    .result .title{font-size:18px;font-weight:700;margin:0 0 6px}
+    .result .url{font-size:12px;color:#87a3c0}
+    .result .desc{font-size:14px;color:#cfd6e3}
+    .pill{display:inline-block;font-size:12px;padding:4px 10px;border:1px solid #2a3755;border-radius:999px;color:#a9b4ca}
+    .aside{width:280px;position:sticky;top:16px}
+    .sr-header{display:flex;gap:10px;align-items:center;margin:0 0 12px}
+    .sr-q{font-weight:800}
+    .engine{font-size:12px;color:#a8b2c8}
+    .toplinks .result{background:#0f1627}
+
+    @media (max-width:900px){
+      .results{flex-direction:column}
+      .aside{width:100%;position:static}
+    }
+    footer{padding:20px;text-align:center;color:#9aa6bd;font-size:12px}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo" onclick="goHome()" style="cursor:pointer">
+      <div class="logo-badge" aria-hidden="true"></div>
+      <div class="logo-text">Vuku</div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="card" id="home">
+      <form class="searchbar" id="searchForm">
+        <input id="q" name="q" autocomplete="on" placeholder="Arama yap..." />
+        <button class="btn" type="submit">Ara</button>
+      </form>
+      <div class="hint">Örnek: <button class="pill" onclick="prefill('karun asası')">karun asası</button></div>
+    </div>
+
+    <div class="card" id="resultsView" style="display:none">
+      <div class="sr-header">
+        <div class="pill">Sonuçlar</div>
+        <div class="engine" id="engineNote"></div>
+      </div>
+      <div class="results">
+        <div class="col">
+          <div id="results"></div>
+        </div>
+        <aside class="aside">
+          <h4 style="margin:.3rem 0 1rem">Öne Çıkan Linkler</h4>
+          <div id="featured" class="toplinks"></div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <footer>© <span id="year"></span> Vuku • PWA • <a href="#" onclick="installPrompt && installPrompt.prompt()">Ana ekrana ekle</a></footer>
+</div>
+
+<script>
+  const $ = sel => document.querySelector(sel);
+  const params = new URLSearchParams(location.search);
+  const qParam = params.get('q') || "";
+  const home = $("#home");
+  const resultsView = $("#resultsView");
+  const resultsEl = $("#results");
+  const featuredEl = $("#featured");
+  const engineNote = $("#engineNote");
+  const year = $("#year");
+  year.textContent = new Date().getFullYear();
+
+  function goHome(){ history.pushState({}, "", location.pathname); render(); }
+  function prefill(text){ $("#q").value = text; $("#searchForm").dispatchEvent(new Event('submit')); }
+
+  // Simple router: home vs results
+  function render(){
+    const q = new URLSearchParams(location.search).get("q");
+    const showResults = !!q;
+    home.style.display = showResults ? "none" : "block";
+    resultsView.style.display = showResults ? "block" : "none";
+    if(showResults){ doSearch(q); $("#q").value = q; }
+  }
+
+  // Providers (no-key)
+  const Providers = {
+    wiki: async (q) => {
+      const url = `https://tr.wikipedia.org/w/api.php?action=query&list=search&format=json&origin=*&srlimit=10&srsearch=${encodeURIComponent(q)}`;
+      const res = await fetch(url); const data = await res.json();
+      return (data.query?.search||[]).map(it => ({
+        title: it.title,
+        url: `https://tr.wikipedia.org/wiki/${encodeURIComponent(it.title.replaceAll(" ","_"))}`,
+        snippet: it.snippet.replace(/<\/?span[^>]*>/g,"").replace(/&quot;/g,'"')+"..."
+      }));
+    },
+    ddg: async (q) => {
+      // DuckDuckGo Instant Answer (may return abstract + RelatedTopics)
+      const url = `https://api.duckduckgo.com/?q=${encodeURIComponent(q)}&format=json&no_redirect=1&no_html=1`;
+      const res = await fetch(url); const d = await res.json();
+      const items = [];
+      if(d.AbstractURL) items.push({title:d.Heading||d.AbstractURL, url:d.AbstractURL, snippet:d.Abstract||"DuckDuckGo özet bilgisi."});
+      if(Array.isArray(d.RelatedTopics)){
+        d.RelatedTopics.forEach(rt=>{
+          if(rt.Text && rt.FirstURL) items.push({title:rt.Text.split(" - ")[0], url:rt.FirstURL, snippet:rt.Text});
+          if(Array.isArray(rt.Topics)){
+            rt.Topics.forEach(t=> t.Text && t.FirstURL && items.push({title:t.Text.split(" - ")[0], url:t.FirstURL, snippet:t.Text}));
+          }
+        });
+      }
+      return items.slice(0,10);
+    }
+  };
+
+  // Featured links seed for "karun" queries
+  function featuredFor(q){
+    const s = (q||"").toLowerCase();
+    if(s.includes("karun")){
+      return [
+        {title:"TDV İslam Ansiklopedisi — Kârûn", url:"https://islamansiklopedisi.org.tr/karun", snippet:"Zenginliğiyle tanınan Kârûn hakkında ansiklopedik madde."},
+        {title:"Vikipedi — Kârûn", url:"https://tr.wikipedia.org/wiki/K%C3%A2r%C3%BBn", snippet:"Kârûn'un Kur’an’daki anlatısı ve rivayetler."},
+        {title:"İslam ve İhsan — Karun Kıssası", url:"https://www.islamveihsan.com/karun-kissasi.html", snippet:"Kıssanın özeti ve ibretler."},
+        {title:"Diyanet — Kasas 78–82 Tefsiri", url:"https://kuran.diyanet.gov.tr/tefsir/Kasas-suresi/78-82-ayet-tefsiri", snippet:"Kârûn kıssasına dair ayet tefsiri."},
+        {title:"Kur’an ve Meali — Karun ile ilgili ayetler", url:"https://www.kuranvemeali.com/konu/karun", snippet:"İlgili ayetler listesi."}
+      ];
+    }
+    return [];
+  }
+
+  async function doSearch(q){
+    resultsEl.innerHTML = `<div class="result"><div class="desc">Aranıyor: <strong>${q}</strong>…</div></div>`;
+    engineNote.textContent = "Wikipedia + DuckDuckGo ile getirildi";
+    featuredEl.innerHTML = featuredFor(q).map(renderItem).join("") || `<div class="result"><div class="desc">Bu terim için öne çıkan bağlantı yok.</div></div>`;
+    try{
+      const [a,b] = await Promise.all([Providers.wiki(q), Providers.ddg(q)]);
+      // merge (unique by url)
+      const seen = new Set();
+      const merged = [...a,...b].filter(it=>{ if(seen.has(it.url)) return false; seen.add(it.url); return true;});
+      if(!merged.length){ resultsEl.innerHTML = `<div class="result"><div class="desc">Sonuç bulunamadı.</div></div>`; return; }
+      resultsEl.innerHTML = merged.map(renderItem).join("");
+      // cache last results for offline revisit
+      try{ localStorage.setItem("vuku:last", JSON.stringify({q, merged, ts:Date.now()})); }catch(e){}
+    }catch(err){
+      resultsEl.innerHTML = `<div class="result"><div class="desc">Çevrimdışı ya da ağ hatası. Son kaydedilen sonuçlar gösterilebilir.</div></div>`;
+      const stash = localStorage.getItem("vuku:last");
+      if(stash){
+        const {q:qq, merged} = JSON.parse(stash);
+        engineNote.textContent = `Önbellekten: “${qq}”`;
+        resultsEl.innerHTML = merged.map(renderItem).join("");
+      }
+    }
+  }
+
+  function renderItem(it){
+    const u = new URL(it.url, location.href);
+    return `
+      <article class="result">
+        <a class="title" href="${u.href}" target="_blank" rel="noopener">${escapeHTML(it.title)}</a>
+        <div class="url">${u.hostname}${u.pathname}</div>
+        <p class="desc">${escapeHTML(it.snippet||"")}</p>
+      </article>`;
+  }
+
+  function escapeHTML(s){ return (s||"").replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+
+  // Form
+  $("#searchForm").addEventListener("submit", (e)=>{
+    e.preventDefault();
+    const q = ($("#q").value||"").trim();
+    if(!q) return;
+    const url = new URL(location.href); url.searchParams.set("q", q);
+    history.pushState({}, "", url); render();
+  });
+
+  // pwa: install prompt
+  let installPrompt = null;
+  window.addEventListener('beforeinstallprompt', (e)=>{ e.preventDefault(); installPrompt = e; });
+
+  // boot
+  render();
+
+  // SW
+  if('serviceWorker' in navigator){
+    navigator.serviceWorker.register('./sw.js').catch(console.warn);
+  }
+</script>
+</body>
+</html>
 
