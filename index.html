@@ -16,6 +16,7 @@
   html,body{margin:0;background:var(--bg);color:var(--ink);
     font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.58}
   a{text-decoration:none;color:inherit}
+
   /* header (results view) */
   .topbar{display:none;position:sticky;top:0;background:#fff;z-index:5;border-bottom:1px solid var(--line)}
   .topwrap{max-width:1200px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:16px}
@@ -25,6 +26,7 @@
   .searchwrap input{flex:1;border:0;outline:0;font-size:16px;background:transparent}
   .sbtn{background:var(--pill);border:0;border-left:1px solid var(--line);border-radius:999px;padding:9px 14px;cursor:pointer}
   .icons{opacity:.7;font-size:14px}
+
   /* home */
   .home{min-height:100svh;display:grid;place-items:center}
   .home .inner{width:100%;max-width:var(--maxw);margin-top:-14vh;display:flex;flex-direction:column;align-items:center}
@@ -34,6 +36,7 @@
   .bigsearch input{flex:1;border:0;outline:0;font-size:18px;background:transparent}
   .chips{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
   .chip{background:var(--pill);border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-size:13px;cursor:pointer}
+
   /* results */
   .container{max-width:1200px;margin:0 auto;padding:0 16px}
   .tabs{display:flex;gap:22px;border-bottom:1px solid var(--line);color:var(--muted);font-size:14px}
@@ -44,9 +47,11 @@
   .title{font-size:20px;font-weight:500;margin:0 0 4px}
   .snippet{color:#3c4043;margin:0}
   .meta{color:var(--muted);font-size:12px;margin-top:6px}
+
   .pager{display:flex;gap:8px;justify-content:center;padding:24px 0}
   .pg{padding:8px 12px;border-radius:8px;border:1px solid var(--line);background:var(--pill);cursor:pointer}
   .pg.active{background:#e8f0fe;border-color:#c7dafc}
+
   footer{border-top:1px solid var(--line);padding:16px;text-align:center;color:#8a94a6;font-size:12px;margin-top:40px}
   @media (max-width:680px){
     .topwrap{gap:10px}
@@ -102,7 +107,27 @@
 <footer>© <span id="y"></span> Vuku • <a href="#" onclick="installPrompt && installPrompt.prompt()">Ana ekrana ekle</a></footer>
 
 <script>
-// TR diakritik normalize + eşanlamlı genişletme
+/* ---------- tiny helpers ---------- */
+const $ = s => document.querySelector(s);
+const yearEl = $("#y"); if (yearEl) yearEl.textContent = new Date().getFullYear();
+let installPrompt=null; window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installPrompt=e;});
+function escapeHTML(t){return (t||"").replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[m]);}
+function goHome(){ history.pushState({}, "", location.pathname); render(); }
+function prefill(text){ $("#homeQ").value=text; $("#homeForm").dispatchEvent(new Event('submit')); }
+
+function filterByKind(items, kind){
+  if(kind==="all") return items||[];
+  return (items||[]).filter(x => (x.kind||"article") === kind);
+}
+function renderItem(it){
+  return `<article class="result">
+    <h3 class="title">${escapeHTML(it.title)}</h3>
+    <p class="snippet">${escapeHTML(it.description||"")}</p>
+    <div class="meta">${escapeHTML((it.meta||"").toString())}</div>
+  </article>`;
+}
+
+/* ---------- query normalization + ranking ---------- */
 function norm(s){ return (s||"").toLowerCase()
   .replace(/â/g,"a").replace(/î/g,"i").replace(/û/g,"u")
   .replace(/ı/g,"i").replace(/ş/g,"s").replace(/ğ/g,"g").replace(/ç/g,"c").replace(/ö/g,"o").replace(/ü/g,"u"); }
@@ -111,10 +136,9 @@ function expandQuery(q){
   const base = norm(q);
   const words = Array.from(new Set(base.split(/\s+/).filter(Boolean)));
   const syn = new Set(words);
-  // manuel eşanlamlılar
   if(words.some(w=>w.includes("karun"))) syn.add("karun").add("hazine");
-  if(words.some(w=>w.includes("asa"))) syn.add("asa").add("asa").add("degnek").add("sopa").add("as a"); // tolerans
-  if(base.includes("kartal")) syn.add("cift basli kartal").add("kartal");
+  if(words.some(w=>w.includes("asa")))  syn.add("asa").add("degnek").add("sopa");
+  if(base.includes("kartal"))           syn.add("cift basli kartal").add("kartal");
   return Array.from(syn);
 }
 
@@ -126,43 +150,35 @@ function rank(items, q){
     const d = norm(it.description||"");
     const g = norm((it.tags||[]).join(" "));
     let sc = 0;
-
-    // tam ifade
     if(t.includes(qn)) sc += 10;
     if(g.includes(qn)) sc += 6;
     if(d.includes(qn)) sc += 4;
-
-    // kelime/sinonim eşleşmeleri
     terms.forEach(w=>{
       if(!w) return;
       if(t.includes(w)) sc += 3;
       if(g.includes(w)) sc += 2;
       if(d.includes(w)) sc += 1;
     });
-
-    // başta başlaması boost
     if(t.startsWith(terms[0]||"")) sc += 2;
     if(it.boost) sc += it.boost;
-
-    return {...it, _score: sc};
+    return {...it,_score:sc};
   })
   .filter(x=>x._score>0)
   .sort((a,b)=>b._score-a._score);
 }
 
-// Listeleme: en az 20 sonuç hedefi (yoksa yakın eşleşmeler)
+/* ---------- list + pager ---------- */
 function drawList(items, page, q, kind){
   let pool = items;
   if(pool.length < 20){
-    // eğer az geldiyse: aynı 'kind'deki en yüksek skorlu 40 öğeye tamamla
     const dataAll = window.__allItems || [];
-    const extra = (dataAll.filter(x => (x.kind||"article") === (kind==="all" ? (x.kind||"article") : kind)))
-      .slice(0, 40 - pool.length);
+    const sameKind = (kind==="all") ? dataAll : dataAll.filter(x => (x.kind||"article")===kind);
+    const extra = sameKind.filter(x=>!pool.includes(x)).slice(0, Math.max(0, 40 - pool.length));
     pool = [...pool, ...extra];
   }
-  const per = 10, total = pool.length, max = Math.ceil(total/per);
+  const per = 10, total = pool.length, max = Math.max(1, Math.ceil(total/per));
   const start=(page-1)*per; const slice=pool.slice(start,start+per);
-  $("#list").innerHTML = slice.map(renderItem).join("") || `<div class="result">“${escape(q)}” için içerik bulunamadı.</div>`;
+  $("#list").innerHTML = slice.map(renderItem).join("") || `<div class="result">“${escapeHTML(q)}” için içerik bulunamadı.</div>`;
 
   const u=new URL(location.href);
   $("#pager").innerHTML = Array.from({length:max},(_,i)=>i+1).map(i=>{
@@ -174,26 +190,65 @@ function drawList(items, page, q, kind){
   }));
 }
 
-// render() içinde, veriyi alırken tüm öğeleri global tut:
+/* ---------- router + events ---------- */
+$("#homeForm").addEventListener("submit", e=>{
+  e.preventDefault();
+  const q=($("#homeQ").value||"").trim(); if(!q) return;
+  const u = new URL(location.href);
+  u.searchParams.set("q", q); u.searchParams.set("page","1"); u.searchParams.delete("kind");
+  history.pushState({}, "", u); render();
+});
+$("#barForm").addEventListener("submit", e=>{
+  e.preventDefault();
+  const q=($("#barQ").value||"").trim(); if(!q) return;
+  const u = new URL(location.href);
+  u.searchParams.set("q", q); u.searchParams.set("page","1");
+  history.pushState({}, "", u); render();
+});
+$("#tabs").addEventListener("click", e=>{
+  const t=e.target.closest(".tab"); if(!t) return;
+  const kind=t.dataset.kind;
+  const u=new URL(location.href); u.searchParams.set("kind",kind); u.searchParams.set("page","1");
+  history.pushState({}, "", u); render();
+});
+window.addEventListener("popstate", render);
+
+/* ---------- render ---------- */
 async function render(){
-  const q   = new URLSearchParams(location.search).get("q");
-  const kind= new URLSearchParams(location.search).get("kind")||"all";
-  const page= parseInt(new URLSearchParams(location.search).get("page")||"1",10);
+  const params = new URLSearchParams(location.search);
+  const q    = params.get("q");
+  const kind = params.get("kind") || "all";
+  const page = parseInt(params.get("page")||"1",10);
 
   const home = $("#home"), topbar=$("#topbar"), res=$("#results");
-  if(!q){ home.style.display="grid"; topbar.style.display="none"; res.style.display="none"; return; }
-
+  if(!q){
+    home.style.display="grid"; topbar.style.display="none"; res.style.display="none";
+    return;
+  }
   home.style.display="none"; topbar.style.display="block"; res.style.display="block";
   $("#barQ").value=q;
 
   document.querySelectorAll(".tab").forEach(el=>el.classList.toggle("active", el.dataset.kind===kind));
 
-  const data = await fetch("./search-data.json?v=4").then(r=>r.json()).catch(()=>({items:[]}));
-  window.__allItems = data.items || []; // <-- global sakla
+  // veri — search-data.json varsa onu kullan; yoksa fallback
+  let data;
+  try{
+    data = await fetch("./search-data.json?v=4").then(r=>r.json());
+  }catch(_){
+    data = {items:[
+      {title:"Karun Asası — genel tasvir",description:"Tek parçalı bronz-altın gövde; tepe çift başlı kartal; 98–105 cm.",tags:["karun","asa"],kind:"article",boost:6},
+      {title:"Hazine sandığı ölçü rehberi",description:"Orta plan için 70×40×45 cm idealdir; geniş planda 90 cm dramatik.",tags:["hazine","sandık"],kind:"article"},
+      {title:"Çift başlı kartal — ikonografi",description:"Güç ve denge; iki yöne hâkimiyet.",tags:["kartal"],kind:"article"}
+    ]};
+  }
+  window.__allItems = data.items || [];
   const items = rank(filterByKind(window.__allItems, kind), q);
   drawList(items, page, q, kind);
 }
 
+/* boot */
+if('serviceWorker' in navigator){ navigator.serviceWorker.register('./sw.js').catch(()=>{}); }
+render();
 </script>
 </body>
 </html>
