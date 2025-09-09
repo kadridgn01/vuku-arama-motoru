@@ -42,7 +42,7 @@
       "tags": ["prop", "dramaturji"]
     },
 
-    // VİDEOLAR
+
     {
       "kind": "video",
       "title": "Karun anlatısında ‘asa’ neden merkezde değil? — kısa açıklama",
@@ -76,7 +76,7 @@
       "tags": ["storyboard", "asa"]
     },
 
-    // GÖRSELLER
+
     {
       "kind": "image",
       "title": "Temsili asa — çift başlı kartal, mat patina",
@@ -120,7 +120,7 @@
       "tags": ["görsel", "ikon"]
     },
 
-    // HABERLER
+
     {
       "kind": "news",
       "source": "Metin Araştırmaları Merkezi",
