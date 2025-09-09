@@ -1,5 +1,5 @@
 // Vuku PWA — app shell + yerel veri (v4)
-const CACHE = "vuku-light-v4";                   // <-- sürümü arttır
+const CACHE = "vuku-light-v5";                   // <-- sürümü arttır
 const SHELL = ["./","./index.html","./manifest.json","./search-data.json?v=4"]; // <-- bust
 
 self.addEventListener("install", e=>{
