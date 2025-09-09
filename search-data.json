@@ -1,157 +1,151 @@
 {
   "items": [
     {
-      "kind":"article",
-      "site_name":"Vuku Ansiklopedi",
-      "path":"kavramlar › karun-asasi",
-      "title":"‘Karun Asası’ ifadesinin kökeni: kıssa, sembol ve popüler kültür ayrımı",
-      "description":"Kârûn anlatısı, kutsal metinlerde servet ve sorumluluk ekseninde geçer; ‘asa’ motifi doğrudan bu kıssada bulunmaz. Popüler kültürdeki asayla ilişki çoğunlukla başka anlatılarla karışımın sonucudur.",
-      "meta":"Öne çıkan kavramlar: anahtar, sandık, mühür, terazi.",
-      "tags":["karun asası","kıssa","ikonografi"],
-      "boost":6
+      "kind": "article",
+      "site_name": "Vuku Ansiklopedi",
+      "path": "kavramlar › karun-asasi",
+      "title": "‘Karun Asası’ ifadesinin kökeni: kıssa, sembol ve popüler kültür ayrımı",
+      "description": "Kârûn anlatısı, kutsal metinlerde servet ve sorumluluk ekseninde geçer; ‘asa’ motifi doğrudan bu kıssada bulunmaz. Popüler kültürdeki asayla ilişki çoğunlukla başka anlatılarla karışımın sonucudur.",
+      "meta": "Öne çıkan kavramlar: anahtar, sandık, mühür, terazi.",
+      "tags": ["karun asası", "kıssa", "ikonografi"],
+      "boost": 6
     },
     {
-      "kind":"article",
-      "site_name":"Metin Araştırmaları",
-      "path":"notlar › kasas-76-82",
-      "title":"Kasas 76–82’nin görsel dili: anahtar demeti ve sandık ağırlığı",
-      "description":"‘Anahtarları güçlükle taşınan’ ifadesi, zenginliğin fiziksel yükünü ve tasarruf yetkisini aynı anda ima eder. Sahnede anahtarların sesi ve ritmi bu anlamı güçlendirir.",
-      "meta":"Okuma süresi ~5 dk.",
-      "tags":["tefsir","anahtar","ses tasarım"]
+      "kind": "article",
+      "site_name": "Metin Araştırmaları",
+      "path": "notlar › kasas-76-82",
+      "title": "Kasas 76–82’nin görsel dili: anahtar demeti ve sandık ağırlığı",
+      "description": "‘Anahtarları güçlükle taşınan’ ifadesi, zenginliğin fiziksel yükünü ve tasarruf yetkisini aynı anda ima eder. Sahnede anahtarların sesi ve ritmi bu anlamı güçlendirir.",
+      "meta": "Okuma süresi ~5 dk.",
+      "tags": ["tefsir", "anahtar", "ses tasarım"]
     },
     {
-      "kind":"article",
-      "site_name":"Görsel Kültür Arşivi",
-      "path":"ikonografi › asa",
-      "title":"Asanın türleri: hükümdarlık değneği, peygamber asası ve yönetim sopası",
-      "description":"Anadolu ve Yakındoğu ikonografisinde ‘asa’ farklı işlevlere sahiptir. Kârûn sahnesinde kullanılması, doğrudan metne değil, kurgu tercihine dayanır; etik notlar eşliğinde değerlendirilmelidir.",
-      "meta":"Güncellenmiş şema eklendi.",
-      "tags":["ikonografi","asa"]
+      "kind": "article",
+      "site_name": "Görsel Kültür Arşivi",
+      "path": "ikonografi › asa",
+      "title": "Asanın türleri: hükümdarlık değneği, peygamber asası ve yönetim sopası",
+      "description": "Anadolu ve Yakındoğu ikonografisinde ‘asa’ farklı işlevlere sahiptir. Kârûn sahnesinde kullanılması, doğrudan metne değil, kurgu tercihine dayanır; etik notlar eşliğinde değerlendirilmelidir.",
+      "meta": "Güncellenmiş şema eklendi.",
+      "tags": ["ikonografi", "asa"]
     },
     {
-      "kind":"article",
-      "site_name":"Sahne & Sinema Notları",
-      "path":"prop › karun-anahtarlar",
-      "title":"Kıssaya sadık prop seti: anahtar, kilit, mühür; asa sadece eşlikçi",
-      "description":"Dramaturjik öneri, gücü değil sorumluluğu öne çıkarır. Parlak yüzey yerine mat patina, yakın planda kabartıyı okunur kılar.",
-      "meta":"Set kılavuzu v2.",
-      "tags":["prop","dramaturji"]
-    },
-
-    /* --- VİDEOLAR --- */
-    {
-      "kind":"video",
-      "title":"Karun anlatısında ‘asa’ neden merkezde değil? — kısa açıklama",
-      "channel":"Vuku Studio",
-      "platform":"YouTube",
-      "duration":"8:34",
-      "published_at":"2025-06-16T10:00:00Z",
-      "moments":5,
-      "tags":["video","karun asası","açıklama"]
+      "kind": "article",
+      "site_name": "Sahne & Sinema Notları",
+      "path": "prop › karun-anahtarlar",
+      "title": "Kıssaya sadık prop seti: anahtar, kilit, mühür; asa sadece eşlikçi",
+      "description": "Dramaturjik öneri, gücü değil sorumluluğu öne çıkarır. Parlak yüzey yerine mat patina, yakın planda kabartıyı okunur kılar.",
+      "meta": "Set kılavuzu v2.",
+      "tags": ["prop", "dramaturji"]
     },
     {
-      "kind":"video",
-      "title":"Anahtarların sesi: zincir ve metal ile ağırlığı nasıl hissettiririz?",
-      "channel":"Ses & Sahne",
-      "platform":"YouTube",
-      "duration":"12:10",
-      "published_at":"2025-07-01T09:00:00Z",
-      "moments":7,
-      "tags":["ses","anahtar"]
+      "kind": "video",
+      "title": "Karun anlatısında ‘asa’ neden merkezde değil? — kısa açıklama",
+      "channel": "Vuku Studio",
+      "platform": "YouTube",
+      "duration": "8:34",
+      "published_at": "2025-06-16T10:00:00Z",
+      "moments": 5,
+      "tags": ["video", "karun asası", "açıklama"]
     },
     {
-      "kind":"video",
-      "title":"Asa tasarımı kurguya nasıl eklemlenir? — storyboard üzerinden",
-      "channel":"Görüntü Yönetimi",
-      "platform":"YouTube",
-      "duration":"9:52",
-      "published_at":"2025-08-14T18:30:00Z",
-      "tags":["storyboard","asa"]
-    },
-
-    /* --- GÖRSELLER --- */
-    {
-      "kind":"image",
-      "title":"Temsili asa — çift başlı kartal, mat patina",
-      "site_name":"Vuku Görsel",
-      "tags":["görsel","asa","kartal"]
+      "kind": "video",
+      "title": "Anahtarların sesi: zincir ve metal ile ağırlığı nasıl hissettiririz?",
+      "channel": "Ses & Sahne",
+      "platform": "YouTube",
+      "duration": "12:10",
+      "published_at": "2025-07-01T09:00:00Z",
+      "moments": 7,
+      "tags": ["ses", "anahtar"]
     },
     {
-      "kind":"image",
-      "title":"Kârûn’un anahtar demeti — kilit ve mühürle birlikte",
-      "site_name":"Arşiv",
-      "tags":["görsel","anahtar","mühür"]
+      "kind": "video",
+      "title": "Asa tasarımı kurguya nasıl eklemlenir? — storyboard üzerinden",
+      "channel": "Görüntü Yönetimi",
+      "platform": "YouTube",
+      "duration": "9:52",
+      "published_at": "2025-08-14T18:30:00Z",
+      "tags": ["storyboard", "asa"]
     },
     {
-      "kind":"image",
-      "title":"Hazine sandığı ayrıntı — perçinli köşe şeridi",
-      "site_name":"Atölye Foto",
-      "tags":["görsel","sandık"]
+      "kind": "image",
+      "title": "Temsili asa — çift başlı kartal, mat patina",
+      "site_name": "Vuku Görsel",
+      "tags": ["görsel", "asa", "kartal"]
     },
     {
-      "kind":"image",
-      "title":"Kabza dokusu — el terini gizleyen damar deseni",
-      "site_name":"Atölye Makro",
-      "tags":["görsel","kabza"]
+      "kind": "image",
+      "title": "Kârûn’un anahtar demeti — kilit ve mühürle birlikte",
+      "site_name": "Arşiv",
+      "tags": ["görsel", "anahtar", "mühür"]
     },
     {
-      "kind":"image",
-      "title":"Renk paleti — antik altın ve soğuk gri dengesi",
-      "site_name":"Pano",
-      "tags":["görsel","renk"]
+      "kind": "image",
+      "title": "Hazine sandığı ayrıntı — perçinli köşe şeridi",
+      "site_name": "Atölye Foto",
+      "tags": ["görsel", "sandık"]
     },
     {
-      "kind":"image",
-      "title":"İkon seti — anahtar, kilit, mühür, terazi",
-      "site_name":"Grafik Birimi",
-      "tags":["görsel","ikon"]
-    },
-
-    /* --- HABERLER (site ikonu + site adı üstte) --- */
-    {
-      "kind":"news",
-      "source":"Metin Araştırmaları Merkezi",
-      "location":"İstanbul",
-      "published_at":"2025-09-05T10:40:00Z",
-      "title":"‘Karun Asası’ başlığına metin merkezli düzeltme: kıssada doğrudan bir asa geçmediğine dair hatırlatma",
-      "description":"Yeni değerlendirme, Kârûn anlatısının odak noktasının ‘anahtarların ağırlığı’ olduğunu; ‘asa’ imgesininse popüler bir karışım nedeniyle eşleştirildiğini belirtiyor. Sahneleme için doğruluk kartı yayımlandı.",
-      "tags":["haber","karun asası"]
+      "kind": "image",
+      "title": "Kabza dokusu — el terini gizleyen damar deseni",
+      "site_name": "Atölye Makro",
+      "tags": ["görsel", "kabza"]
     },
     {
-      "kind":"news",
-      "source":"Küratoryal Gündem",
-      "location":"İstanbul",
-      "published_at":"2025-09-04T18:30:00Z",
-      "title":"Sergi rotasında Kârûn sahnesi: asa değil anahtar–sandık ekseni öne çıkarılıyor",
-      "description":"Küratörler, sahne akışında önce anahtar demeti, ardından kilit ve sandığın gösterildiğini; temsili asanın ‘eşlikçi’ olarak arka planda bırakıldığını açıkladı.",
-      "tags":["sergi","küratorya"]
+      "kind": "image",
+      "title": "Renk paleti — antik altın ve soğuk gri dengesi",
+      "site_name": "Pano",
+      "tags": ["görsel", "renk"]
     },
     {
-      "kind":"news",
-      "source":"Vuku Teknik",
-      "location":"Set",
-      "published_at":"2025-09-05T08:25:00Z",
-      "title":"Metal yüzeyde parlamayı azaltan yeni difüzör: kabartılar ışıkta daha okunur",
-      "description":"2:1 ışık oranı korunarak taş yuvası çevresinde speküler patlama kontrol altına alındı. Yakın plan denemelerinde kabartı çizgileri belirginleşti.",
-      "tags":["ışık","patina"]
+      "kind": "image",
+      "title": "İkon seti — anahtar, kilit, mühür, terazi",
+      "site_name": "Grafik Birimi",
+      "tags": ["görsel", "ikon"]
     },
     {
-      "kind":"news",
-      "source":"Sahne & Sinema Notları",
-      "location":"İzmir",
-      "published_at":"2025-09-03T16:40:00Z",
-      "title":"Kıssaya sadık prop kılavuzu: ‘asa’ kullanılsa bile güç değil sorumluluk vurgusu",
-      "description":"Parlak yerine mat yüzeyler ve ses tasarımıyla desteklenen ağır anahtarlar, sahnenin odağını doğru yere taşıyor.",
-      "tags":["prop","dramaturji"]
+      "kind": "news",
+      "source": "Metin Araştırmaları Merkezi",
+      "location": "İstanbul",
+      "published_at": "2025-09-05T10:40:00Z",
+      "title": "‘Karun Asası’ başlığına metin merkezli düzeltme: kıssada doğrudan bir asa geçmediğine dair hatırlatma",
+      "description": "Yeni değerlendirme, Kârûn anlatısının odak noktasının ‘anahtarların ağırlığı’ olduğunu; ‘asa’ imgesininse popüler bir karışım nedeniyle eşleştirildiğini belirtiyor. Sahneleme için doğruluk kartı yayımlandı.",
+      "tags": ["haber", "karun asası"]
     },
     {
-      "kind":"news",
-      "source":"Dil Çalışmaları Enstitüsü",
-      "location":"Bursa",
-      "published_at":"2025-09-03T10:10:00Z",
-      "title":"‘Asâ / asa’ yazımı dijital aramalarda nasıl ele alınmalı? — imla notu",
-      "description":"Şapkalı yazımın uzun ünlüyü belirttiği; dizinlerde her iki formun da aynı anahtar altında toplanması gerektiği hatırlatıldı.",
-      "tags":["imla","arama"]
+      "kind": "news",
+      "source": "Küratoryal Gündem",
+      "location": "İstanbul",
+      "published_at": "2025-09-04T18:30:00Z",
+      "title": "Sergi rotasında Kârûn sahnesi: asa değil anahtar–sandık ekseni öne çıkarılıyor",
+      "description": "Küratörler, sahne akışında önce anahtar demeti, ardından kilit ve sandığın gösterildiğini; temsili asanın ‘eşlikçi’ olarak arka planda bırakıldığını açıkladı.",
+      "tags": ["sergi", "küratorya"]
+    },
+    {
+      "kind": "news",
+      "source": "Vuku Teknik",
+      "location": "Set",
+      "published_at": "2025-09-05T08:25:00Z",
+      "title": "Metal yüzeyde parlamayı azaltan yeni difüzör: kabartılar ışıkta daha okunur",
+      "description": "2:1 ışık oranı korunarak taş yuvası çevresinde speküler patlama kontrol altına alındı. Yakın plan denemelerinde kabartı çizgileri belirginleşti.",
+      "tags": ["ışık", "patina"]
+    },
+    {
+      "kind": "news",
+      "source": "Sahne & Sinema Notları",
+      "location": "İzmir",
+      "published_at": "2025-09-03T16:40:00Z",
+      "title": "Kıssaya sadık prop kılavuzu: ‘asa’ kullanılsa bile güç değil sorumluluk vurgusu",
+      "description": "Parlak yerine mat yüzeyler ve ses tasarımıyla desteklenen ağır anahtarlar, sahnenin odağını doğru yere taşıyor.",
+      "tags": ["prop", "dramaturji"]
+    },
+    {
+      "kind": "news",
+      "source": "Dil Çalışmaları Enstitüsü",
+      "location": "Bursa",
+      "published_at": "2025-09-03T10:10:00Z",
+      "title": "‘Asâ / asa’ yazımı dijital aramalarda nasıl ele alınmalı? — imla notu",
+      "description": "Şapkalı yazımın uzun ünlüyü belirttiği; dizinlerde her iki formun da aynı anahtar altında toplanması gerektiği hatırlatıldı.",
+      "tags": ["imla", "arama"]
     }
   ]
 }
