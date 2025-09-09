@@ -54,17 +54,7 @@
       "thumb": "assets/gorsel1.jpg",
       "tags": ["video", "karun asası", "açıklama"]
     },
-    {
-      "kind": "video",
-      "title": "Anahtarların sesi: zincir ve metal ile ağırlığı nasıl hissettiririz?",
-      "channel": "Ses & Sahne",
-      "platform": "YouTube",
-      "duration": "12:10",
-      "published_at": "2025-07-01T09:00:00Z",
-      "moments": 7,
-      "thumb": "",
-      "tags": ["ses", "anahtar"]
-    },
+
     {
       "kind": "video",
       "title": "Karun Hazinelerinin Bulunuşu ve Laneti",
@@ -98,28 +88,6 @@
       "thumb": "assets/gorsel5.jpg",
       "tags": ["görsel", "sandık"]
     },
-    {
-      "kind": "image",
-      "title": "Kabza dokusu — el terini gizleyen damar deseni",
-      "site_name": "Atölye Makro",
-      "thumb": "",
-      "tags": ["görsel", "kabza"]
-    },
-    {
-      "kind": "image",
-      "title": "Renk paleti — antik altın ve soğuk gri dengesi",
-      "site_name": "Pano",
-      "thumb": "",
-      "tags": ["görsel", "renk"]
-    },
-    {
-      "kind": "image",
-      "title": "İkon seti — anahtar, kilit, mühür, terazi",
-      "site_name": "Grafik Birimi",
-      "thumb": "",
-      "tags": ["görsel", "ikon"]
-    },
-
 
     {
       "kind": "news",
