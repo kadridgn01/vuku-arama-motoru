@@ -45,13 +45,13 @@
 
     {
       "kind": "video",
-      "title": "Karun anlatısında ‘asa’ neden merkezde değil? — kısa açıklama",
+      "title": "Karun - Asa'yı Artur'a Getiriyor. — kısa açıklama",
       "channel": "Vuku Studio",
-      "platform": "YouTube",
-      "duration": "8:34",
+      "platform": "Video",
+      "duration": "4:34",
       "published_at": "2025-06-16T10:00:00Z",
       "moments": 5,
-      "thumb": "",
+      "thumb": "assets/gorsel1.jpg",
       "tags": ["video", "karun asası", "açıklama"]
     },
     {
@@ -67,35 +67,35 @@
     },
     {
       "kind": "video",
-      "title": "Asa tasarımı kurguya nasıl eklemlenir? — storyboard üzerinden",
+      "title": "Karun Hazinelerinin Bulunuşu ve Laneti",
       "channel": "Görüntü Yönetimi",
-      "platform": "YouTube",
+      "platform": "Video",
       "duration": "9:52",
       "published_at": "2025-08-14T18:30:00Z",
-      "thumb": "",
-      "tags": ["storyboard", "asa"]
+      "thumb": "assets/gorsel2.jpg",
+      "tags": ["karun", "asa"]
     },
 
 
     {
       "kind": "image",
-      "title": "Temsili asa — çift başlı kartal, mat patina",
+      "title": "Karun kimdir?",
       "site_name": "Vuku Görsel",
-      "thumb": "",
+      "thumb": "assets/gorsel3.jpg",
       "tags": ["görsel", "asa", "kartal"]
     },
     {
       "kind": "image",
-      "title": "Kârûn’un anahtar demeti — kilit ve mühürle birlikte",
+      "title": "Karun'un en önemli hazinesi bulundu.",
       "site_name": "Arşiv",
-      "thumb": "",
+      "thumb": "assets/gorsel4.jpg",
       "tags": ["görsel", "anahtar", "mühür"]
     },
     {
       "kind": "image",
-      "title": "Hazine sandığı ayrıntı — perçinli köşe şeridi",
+      "title": "Karun Hazinesi",
       "site_name": "Atölye Foto",
-      "thumb": "",
+      "thumb": "assets/gorsel5.jpg",
       "tags": ["görsel", "sandık"]
     },
     {
@@ -127,9 +127,9 @@
       "source_icon": "",
       "location": "İstanbul",
       "published_at": "2025-09-05T10:40:00Z",
-      "title": "‘Karun Asası’ başlığına metin merkezli düzeltme: kıssada doğrudan bir asa geçmediğine dair hatırlatma",
-      "description": "Yeni değerlendirme, Kârûn anlatısının odak noktasının ‘anahtarların ağırlığı’ olduğunu; ‘asa’ imgesininse popüler bir karışım nedeniyle eşleştirildiğini belirtiyor. Sahneleme için doğruluk kartı yayımlandı.",
-      "thumb": "",
+      "title": "‘Karun Kıssası Nedir?",
+      "description": "Karun kıssası, Kur'an-ı Kerim'in Kasas Suresi'nde anlatılan, Hz. Musa'nın kavminden olan, hazineleriyle gururlanan ve sonu acı olan Kârûn'un zenginliği ve azgınlığına dair ibretlik bir hikâyedir. Bu kıssa, zenginliğin verdiği güvenceyle şımarmak, Allah'a isyan etmek ve insanlara karşı haksızlık yapanlar için bir uyarı niteliğindedir.",
+      "thumb": "assets/gorsel6.jpg",
       "tags": ["haber", "karun asası"]
     },
     {
@@ -138,9 +138,9 @@
       "source_icon": "",
       "location": "İstanbul",
       "published_at": "2025-09-04T18:30:00Z",
-      "title": "Sergi rotasında Kârûn sahnesi: asa değil anahtar–sandık ekseni öne çıkarılıyor",
-      "description": "Küratörler, sahne akışında önce anahtar demeti, ardından kilit ve sandığın gösterildiğini; temsili asanın ‘eşlikçi’ olarak arka planda bırakıldığını açıkladı.",
-      "thumb": "",
+      "title": ",En Zengin Firavun Kimdir?",
+      "description": "Tarihte "en zengin firavun" olarak kesin bir unvanı bulunmamaktadır, ancak Antik Mısır'ın en zengin ve güçlü figürleri arasında Yeni Krallık döneminden III. Amenhotep ve özellikle II. Ramses öne çıkar. Her ikisi de büyük bir servete ve güce sahipti, ancak bu servetlerin büyüklüğünü kesin olarak karşılaştırmak mümkün değildir.",
+      "thumb": "assets/gorsel7.jpg",
       "tags": ["sergi", "küratorya"]
     },
     {
@@ -149,9 +149,9 @@
       "source_icon": "",
       "location": "Set",
       "published_at": "2025-09-05T08:25:00Z",
-      "title": "Metal yüzeyde parlamayı azaltan yeni difüzör: kabartılar ışıkta daha okunur",
-      "description": "2:1 ışık oranı korunarak taş yuvası çevresinde speküler patlama kontrol altına alındı. Yakın plan denemelerinde kabartı çizgileri belirginleşti.",
-      "thumb": "",
+      "title": "Karun kaç yıl yaşamıştır?",
+      "description": "Karun'un (Kroisos) tam ölüm yaşı hakkında kesin bir bilgi bulunmamaktadır, ancak kendisi MÖ 566 yılında 35 yaşındayken Lidya Kralı olduğu biliniyor. Efsaneye göre, büyük bir zenginliğe ulaşmasına rağmen mutsuzluktan acı çekerek ölmüştür.",
+      "thumb": "assets/gorsel9.jpg",
       "tags": ["ışık", "patina"]
     },
     {
@@ -160,9 +160,9 @@
       "source_icon": "",
       "location": "İzmir",
       "published_at": "2025-09-03T16:40:00Z",
-      "title": "Kıssaya sadık prop kılavuzu: ‘asa’ kullanılsa bile güç değil sorumluluk vurgusu",
-      "description": "Parlak yerine mat yüzeyler ve ses tasarımıyla desteklenen ağır anahtarlar, sahnenin odağını doğru yere taşıyor.",
-      "thumb": "",
+      "title": "Dünyanın En Zengin Kralı Kimdir?",
+      "description": "Tarihin gördüğü en zengin kral, Mısır'dan daha zengin bir servete sahip olan Mali İmparatoru Mansa Musa'dır (Mansa Musa), bugünün parasıyla serveti 400 milyar doları aşmaktadır. En zengin kraliyet ailesi üyelerinden biri ise Brunei Sultanı Hassanal Bolkiah'tır.",
+      "thumb": "assets/gorsel8.jpg",
       "tags": ["prop", "dramaturji"]
     },
     {
@@ -171,9 +171,9 @@
       "source_icon": "",
       "location": "Bursa",
       "published_at": "2025-09-03T10:10:00Z",
-      "title": "‘Asâ / asa’ yazımı dijital aramalarda nasıl ele alınmalı? — imla notu",
-      "description": "Şapkalı yazımın uzun ünlüyü belirttiği; dizinlerde her iki formun da aynı anahtar altında toplanması gerektiği hatırlatıldı.",
-      "thumb": "",
+      "title": "Kur'an'da Karun Nasıl Geçiyor?",
+      "description": "Kur'an-ı Kerim'de Kârûn kıssası, Kasas Suresi'nin 76-82. ayetlerinde anlatılır. Kârûn, Hz. Mûsâ'nın kavminden olan ve büyük bir servete sahip bulunan, ancak bu zenginliği nedeniyle böbürlenip insanlara haksızlık eden bir kişidir. Kendisine verilen hazinelerin sırrını kendi bilgisinden kaynaklandığını iddia etmiş, ancak sonunda Allah onu servetiyle birlikte yerin dibine geçirmiştir.",
+      "thumb": "assets/gorsel10.jpg",
       "tags": ["imla", "arama"]
     }
   ]
