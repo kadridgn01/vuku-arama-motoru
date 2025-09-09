@@ -165,6 +165,42 @@ function siteLineHTML(site, path, icon){
   return `<div class="site-line">${faviconHTML(site, icon)}<span>${escapeHTML(site)}</span>${path?` · <span>${escapeHTML(path)}</span>`:""}</div>`;
 }
 
+/* ==== Arama skorlama (eksik olan kısım eklendi) ==== */
+function norm(s){ return (s||"").toLowerCase()
+  .replace(/â/g,"a").replace(/î/g,"i").replace(/û/g,"u")
+  .replace(/ı/g,"i").replace(/ş/g,"s").replace(/ğ/g,"g").replace(/ç/g,"c").replace(/ö/g,"o").replace(/ü/g,"u"); }
+function expandQuery(q){
+  const base = norm(q), words = Array.from(new Set(base.split(/\s+/).filter(Boolean)));
+  const syn = new Set(words);
+  if(words.some(w=>w.includes("karun"))) syn.add("karun").add("karun asasi").add("hazine");
+  if(words.some(w=>w.includes("asa")))  syn.add("asa").add("degnek").add("sopa");
+  if(base.includes("kartal"))           syn.add("cift basli kartal").add("kartal");
+  return Array.from(syn);
+}
+function rank(items, q){
+  const qn = norm(q), terms = expandQuery(q), now = Date.now();
+  return (items||[]).map(it=>{
+    const t = norm(it.title||""), d = norm(it.description||""), g = norm((it.tags||[]).join(" "));
+    let sc=0;
+    if(t.includes(qn)) sc+=10; if(g.includes(qn)) sc+=6; if(d.includes(qn)) sc+=4;
+    terms.forEach(w=>{ if(!w) return; if(t.includes(w)) sc+=3; if(g.includes(w)) sc+=2; if(d.includes(w)) sc+=1; });
+    if(t.startsWith(terms[0]||"")) sc+=2;
+    if((it.kind==="news"||it.kind==="video") && it.published_at){
+      const ageH=Math.abs(now - new Date(it.published_at).getTime())/36e5; sc+=Math.max(0,120-ageH)/5;
+    }
+    if(it.boost) sc+=it.boost;
+    return {...it,_score:sc};
+  }).filter(x=>x._score>0).sort((a,b)=>b._score-a._score);
+}
+function sortByDateDesc(arr){
+  return [...(arr||[])].sort((a,b)=>{
+    const ta = new Date(a.published_at||0).getTime();
+    const tb = new Date(b.published_at||0).getTime();
+    return tb - ta;
+  });
+}
+
+/* renderers */
 function renderOrganic(list){
   return `<div class="colwrap">
     ${list.map(it=>`
@@ -184,7 +220,7 @@ function renderVideos(list){
       ${list.map(v=>`
         <article class="video-row">
           <div class="vthumb" role="img" aria-label="Video görseli"
-     style="${v.thumb ? `background-image:url('${v.thumb}');background-size:cover;background-position:center` : ''}">
+               style="${v.thumb ? `background-image:url('${v.thumb}');background-size:cover;background-position:center` : ''}">
             <div class="vdur">${escapeHTML(v.duration||"")}</div>
           </div>
           <div>
@@ -203,8 +239,8 @@ function renderImages(list){
     <div class="images-grid">
       ${list.map(im=>`
         <figure class="imgcard">
-         <div class="img" role="img" aria-label="${escapeHTML(im.title)}"
-      style="${im.thumb ? `background-image:url('${im.thumb}');background-size:cover;background-position:center` : ''}"></div>
+          <div class="img" role="img" aria-label="${escapeHTML(im.title)}"
+               style="${im.thumb ? `background-image:url('${im.thumb}');background-size:cover;background-position:center` : ''}"></div>
           <figcaption class="imgcap">${escapeHTML(im.title)}</figcaption>
           <div class="imgmeta">${escapeHTML(im.site_name||"")}</div>
         </figure>`).join("")}
@@ -223,9 +259,14 @@ function renderNewsTopAndList(list){
       <div class="news-top">
         ${top.map(n=>`
           <article class="news-card-top">
-            <div class="newssite">${faviconHTML(n.source||"Vuku Haber", n.source_icon || n.site_icon)}<span>${escapeHTML(n.source||"Vuku Haber")}</span> · <span>${escapeHTML(n.location||"")}</span> · <span>${timeAgo(n.published_at)}</span></div>
+            <div class="newssite">
+              ${faviconHTML(n.source||"Vuku Haber", n.source_icon || n.site_icon)}
+              <span>${escapeHTML(n.source||"Vuku Haber")}</span> ·
+              <span>${escapeHTML(n.location||"")}</span> ·
+              <span>${timeAgo(n.published_at)}</span>
+            </div>
             <div class="nthumb" aria-hidden="true"
-      style="${n.thumb ? `background-image:url('${n.thumb}');background-size:cover;background-position:center` : ''}"></div>
+                 style="${n.thumb ? `background-image:url('${n.thumb}');background-size:cover;background-position:center` : ''}"></div>
             <h3 class="news-h">${escapeHTML(n.title)}</h3>
             <p class="news-s">${escapeHTML(n.description||"")}</p>
           </article>`).join("")}
@@ -234,9 +275,14 @@ function renderNewsTopAndList(list){
         ${rest.map(n=>`
           <article class="news-row">
             <div class="nthumb" aria-hidden="true"
-      style="${n.thumb ? `background-image:url('${n.thumb}');background-size:cover;background-position:center` : ''}"></div>
+                 style="${n.thumb ? `background-image:url('${n.thumb}');background-size:cover;background-position:center` : ''}"></div>
             <div>
-              <div class="newssite">${faviconHTML(n.source||"Vuku Haber")}<span>${escapeHTML(n.source||"Vuku Haber")}</span> · <span>${escapeHTML(n.location||"")}</span> · <span>${timeAgo(n.published_at)}</span></div>
+              <div class="newssite">
+                ${faviconHTML(n.source||"Vuku Haber", n.source_icon || n.site_icon)}
+                <span>${escapeHTML(n.source||"Vuku Haber")}</span> ·
+                <span>${escapeHTML(n.location||"")}</span> ·
+                <span>${timeAgo(n.published_at)}</span>
+              </div>
               <h3 class="news-h" style="font-size:18px">${escapeHTML(n.title)}</h3>
               <p class="news-s">${escapeHTML(n.description||"")}</p>
             </div>
@@ -256,11 +302,15 @@ function draw(list, page, kind, q){
   const start=(page-1)*per, slice=list.slice(start, start+per);
 
   if(kind==="all"){
-    // compose modules: videos + images + news(3+...) + organic list
     const all = window.__allItems||[];
-    const vids = rank(all.filter(x=>x.kind==="video"), q).slice(0,3);
-    const imgs = rank(all.filter(x=>x.kind==="image"), q).slice(0,6);
-    const nws  = rank(all.filter(x=>x.kind==="news"), q).slice(0,6);
+    const vidsPool = all.filter(x=>x.kind==="video");
+    const imgsPool = all.filter(x=>x.kind==="image");
+    const newsPool = all.filter(x=>x.kind==="news");
+    let vids = rank(vidsPool, q); if(!vids.length) vids = sortByDateDesc(vidsPool);
+    let imgs = rank(imgsPool, q); if(!imgs.length) imgs = imgsPool;
+    let nws  = rank(newsPool, q); if(!nws.length)  nws  = sortByDateDesc(newsPool);
+    vids = vids.slice(0,3); imgs = imgs.slice(0,6); nws = nws.slice(0,6);
+
     const articles = slice.filter(x=>x.kind!=="video"&&x.kind!=="image"&&x.kind!=="news");
     $("#mount").innerHTML =
       renderVideos(vids) +
@@ -268,11 +318,17 @@ function draw(list, page, kind, q){
       renderNewsTopAndList(nws) +
       renderOrganic(articles);
   }else if(kind==="news"){
-    $("#mount").innerHTML = renderNewsTopAndList(slice);
+    const pool = byKind(window.__allItems, "news");
+    let listNews = rank(pool, q); if(!listNews.length) listNews = sortByDateDesc(pool);
+    $("#mount").innerHTML = renderNewsTopAndList(listNews.slice(start, start+per));
   }else if(kind==="video"){
-    $("#mount").innerHTML = renderVideos(slice);
+    const pool = byKind(window.__allItems, "video");
+    let v = rank(pool, q); if(!v.length) v = sortByDateDesc(pool);
+    $("#mount").innerHTML = renderVideos(v.slice(start, start+per));
   }else if(kind==="image"){
-    $("#mount").innerHTML = renderImages(slice);
+    const pool = byKind(window.__allItems, "image");
+    let im = rank(pool, q); if(!im.length) im = pool;
+    $("#mount").innerHTML = renderImages(im.slice(start, start+per));
   }else{
     $("#mount").innerHTML = renderOrganic(slice);
   }
@@ -315,11 +371,21 @@ async function render(){
   document.querySelectorAll(".tab").forEach(el=>el.classList.toggle("active", el.dataset.kind===kind));
 
   let data={items:[]};
-  try{ data = await fetch("./search-data.json?v=8").then(r=>r.json()); }catch(_){}
+  try{
+    data = await fetch("./search-data.json?v=9").then(r=>r.json());
+  }catch(err){
+    console.warn("search-data yüklenemedi:", err);
+    data = {items:[]};
+  }
   window.__allItems = data.items || [];
 
-  // rank + ensure pool
+  // list base (by kind) + safety pool
   let items = rank(byKind(window.__allItems, kind), q);
+  if(!items.length){
+    // eşleşme yoksa yedek: tarihe göre / ya da düz
+    const pool = byKind(window.__allItems, kind);
+    items = (kind==="news"||kind==="video") ? sortByDateDesc(pool) : pool;
+  }
   if(items.length<20){ const pool = byKind(window.__allItems, kind).filter(x=>!items.includes(x)); items = items.concat(pool).slice(0,40); }
   draw(items, page, kind, q);
 }
