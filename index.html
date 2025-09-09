@@ -21,7 +21,17 @@
   .glogo{font-size:22px;font-weight:800;color:var(--brand);cursor:pointer}
   .searchwrap{flex:1;display:flex;align-items:center;border:1px solid var(--line);border-radius:999px;padding:10px 14px;background:#fff}
   .searchwrap input{flex:1;border:0;outline:0;font-size:16px;background:transparent}
-  .sbtn{background:var(--pill);border:0;border-left:1px solid var(--line);border-radius:999px;padding:9px 14px;cursor:pointer}
+  .sbtn {
+  background: var(--pill);
+  border: 0;
+  border-left: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 9px 14px;
+  cursor: pointer;
+  color: var(--ink); /* yazıyı siyaha çeker */
+  font-weight: 500; /* daha okunur olur */
+}
+
 
   /* home */
   .home{min-height:100svh;display:grid;place-items:center}
@@ -90,13 +100,15 @@
   footer{border-top:1px solid var(--line);padding:16px;text-align:center;color:#8a94a6;font-size:12px;margin-top:40px}
 
   @media (max-width:860px){ .images-grid{grid-template-columns:repeat(2,minmax(0,1fr))} .news-top{grid-template-columns:1fr 1fr} }
-  @media (max-width:640px){
-    .video-row{grid-template-columns:1fr}
-    .vthumb{width:100%;height:180px}
-    .news-top{grid-template-columns:1fr}
-    .news-row{grid-template-columns:1fr}
-    .news-row .nthumb{width:100%;height:140px}
-  }
+@media (max-width:640px){
+  .images-grid{grid-template-columns:1fr}
+  .video-row{grid-template-columns:1fr}
+  .vthumb{width:100%;height:180px}
+  .news-top{grid-template-columns:1fr}
+  .news-row{grid-template-columns:1fr}
+  .news-row .nthumb{width:100%;height:140px}
+}
+
   .biglogo img {
   height:90px;
   width:auto;
