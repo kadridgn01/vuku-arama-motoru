@@ -110,6 +110,23 @@
   width:auto;
   display:block;
 }
+.biglogo {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+  margin-bottom:26px;
+}
+.biglogo img {
+  height:64px;
+  width:auto;
+  display:block;
+}
+.biglogo span {
+  font-size:28px;
+  font-weight:700;
+  color:var(--brand);
+}
 
 </style>
 </head>
@@ -117,19 +134,15 @@
 <!-- HOME -->
 <section id="home" class="home">
   <div class="inner">
-    <a class="biglogo" href="/" aria-label="Vuku">
-  <img src="assets/logo.png" alt="Vuku" />
+    <div class="biglogo">
+  <img src="assets/logo-wordmark.svg" alt="Vuku" />
+  <span>Vuku</span>
+</div>
 </a>
     <form id="homeForm" class="bigsearch">
       <input id="homeQ" placeholder="Ara…" autocomplete="on" />
       <button class="sbtn" type="submit">Ara</button>
     </form>
-    <div class="chips">
-      <button class="chip" onclick="prefill('karun asası')">karun asası</button>
-      <button class="chip" onclick="prefill('hazine sandığı')">hazine sandığı</button>
-      <button class="chip" onclick="prefill('çift başlı kartal')">çift başlı kartal</button>
-    </div>
-  </div>
 </section>
   
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
