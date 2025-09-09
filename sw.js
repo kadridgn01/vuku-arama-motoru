@@ -1,6 +1,6 @@
-// Vuku PWA — app shell + yerel veri (v8)
-const CACHE = "vuku-light-v8";                   // <-- sürümü arttır
-const SHELL = ["./","./index.html","./manifest.json","./search-data.json?v=8"]; // <-- bust
+// Vuku PWA — app shell + yerel veri (v9)
+const CACHE = "vuku-light-v9";                   // <-- sürümü arttır
+const SHELL = ["./","./index.html","./manifest.json","./search-data.json?v=9"]; // <-- bust
 
 self.addEventListener("install", e=>{
   e.waitUntil(caches.open(CACHE).then(c=>c.addAll(SHELL)));
