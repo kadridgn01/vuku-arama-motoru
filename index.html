@@ -155,47 +155,21 @@ function escapeHTML(t){ return (t||"").replace(/[&<>"]/g, m => ({ "&":"&amp;","<
 
 /* favicon monogram (deterministic renk) */
 function colorFrom(str){ let h=0; for(let i=0;i<str.length;i++){h=(h*31+str.charCodeAt(i))>>>0;} return `hsl(${h%360} 65% 50%)`; }
-function faviconHTML(name){ const ch=(name||'?').trim()[0]?.toUpperCase()||'?'; const bg=colorFrom(name||'site'); return `<span class="favicon" style="background:${bg}">${escapeHTML(ch)}</span>`; }
-
-/* normalize + synonyms */
-function norm(s){ return (s||"").toLowerCase()
-  .replace(/â/g,"a").replace(/î/g,"i").replace(/û/g,"u")
-  .replace(/ı/g,"i").replace(/ş/g,"s").replace(/ğ/g,"g").replace(/ç/g,"c").replace(/ö/g,"o").replace(/ü/g,"u"); }
-function expandQuery(q){
-  const base = norm(q), words = Array.from(new Set(base.split(/\s+/).filter(Boolean)));
-  const syn = new Set(words);
-  if(words.some(w=>w.includes("karun"))) syn.add("karun").add("karun asasi").add("karun asasi").add("hazine");
-  if(words.some(w=>w.includes("asa")))  syn.add("asa").add("as a").add("degnek").add("sopa");
-  if(base.includes("kartal"))           syn.add("cift basli kartal").add("kartal");
-  return Array.from(syn);
+function faviconHTML(name, icon){
+  if(icon) return `<img class="favicon" src="${icon}" alt="" style="width:18px;height:18px;border-radius:50%">`;
+  const ch=(name||'?').trim()[0]?.toUpperCase()||'?';
+  const bg=colorFrom(name||'site');
+  return `<span class="favicon" style="background:${bg}">${escapeHTML(ch)}</span>`;
+}
+function siteLineHTML(site, path, icon){
+  return `<div class="site-line">${faviconHTML(site, icon)}<span>${escapeHTML(site)}</span>${path?` · <span>${escapeHTML(path)}</span>`:""}</div>`;
 }
 
-/* ranking (+ fresh bonus for news/video) */
-function rank(items, q){
-  const qn = norm(q), terms = expandQuery(q), now = Date.now();
-  return (items||[]).map(it=>{
-    const t = norm(it.title||""), d = norm(it.description||""), g = norm((it.tags||[]).join(" "));
-    let sc=0;
-    if(t.includes(qn)) sc+=10; if(g.includes(qn)) sc+=6; if(d.includes(qn)) sc+=4;
-    terms.forEach(w=>{ if(!w) return; if(t.includes(w)) sc+=3; if(g.includes(w)) sc+=2; if(d.includes(w)) sc+=1; });
-    if(t.startsWith(terms[0]||"")) sc+=2;
-    if((it.kind==="news"||it.kind==="video") && it.published_at){
-      const ageH=Math.abs(now - new Date(it.published_at).getTime())/36e5; sc+=Math.max(0,120-ageH)/5;
-    }
-    if(it.boost) sc+=it.boost;
-    return {...it,_score:sc};
-  }).filter(x=>x._score>0).sort((a,b)=>b._score-a._score);
-}
-
-/* renderers */
-function siteLineHTML(site, path){
-  return `<div class="site-line">${faviconHTML(site)}<span>${escapeHTML(site)}</span>${path?` · <span>${escapeHTML(path)}</span>`:""}</div>`;
-}
 function renderOrganic(list){
   return `<div class="colwrap">
     ${list.map(it=>`
       <article class="result">
-        ${siteLineHTML(it.site_name||"Vuku", it.path)}
+        ${siteLineHTML(it.site_name||"Vuku", it.path, it.site_icon)}
         <h3 class="title">${escapeHTML(it.title)}</h3>
         <p class="snippet">${escapeHTML(it.description||"")}</p>
         <div class="meta">${escapeHTML(it.meta||"")}</div>
@@ -209,7 +183,8 @@ function renderVideos(list){
     <div class="videos">
       ${list.map(v=>`
         <article class="video-row">
-          <div class="vthumb" role="img" aria-label="Video görseli">
+          <div class="vthumb" role="img" aria-label="Video görseli"
+     style="${v.thumb ? `background-image:url('${v.thumb}');background-size:cover;background-position:center` : ''}">
             <div class="vdur">${escapeHTML(v.duration||"")}</div>
           </div>
           <div>
@@ -228,7 +203,8 @@ function renderImages(list){
     <div class="images-grid">
       ${list.map(im=>`
         <figure class="imgcard">
-          <div class="img" role="img" aria-label="${escapeHTML(im.title)}"></div>
+         <div class="img" role="img" aria-label="${escapeHTML(im.title)}"
+      style="${im.thumb ? `background-image:url('${im.thumb}');background-size:cover;background-position:center` : ''}"></div>
           <figcaption class="imgcap">${escapeHTML(im.title)}</figcaption>
           <div class="imgmeta">${escapeHTML(im.site_name||"")}</div>
         </figure>`).join("")}
@@ -247,8 +223,9 @@ function renderNewsTopAndList(list){
       <div class="news-top">
         ${top.map(n=>`
           <article class="news-card-top">
-            <div class="newssite">${faviconHTML(n.source||"Vuku Haber")}<span>${escapeHTML(n.source||"Vuku Haber")}</span> · <span>${escapeHTML(n.location||"")}</span> · <span>${timeAgo(n.published_at)}</span></div>
-            <div class="nthumb" aria-hidden="true"></div>
+            <div class="newssite">${faviconHTML(n.source||"Vuku Haber", n.source_icon || n.site_icon)}<span>${escapeHTML(n.source||"Vuku Haber")}</span> · <span>${escapeHTML(n.location||"")}</span> · <span>${timeAgo(n.published_at)}</span></div>
+            <div class="nthumb" aria-hidden="true"
+      style="${n.thumb ? `background-image:url('${n.thumb}');background-size:cover;background-position:center` : ''}"></div>
             <h3 class="news-h">${escapeHTML(n.title)}</h3>
             <p class="news-s">${escapeHTML(n.description||"")}</p>
           </article>`).join("")}
@@ -256,7 +233,8 @@ function renderNewsTopAndList(list){
       <div class="news-list">
         ${rest.map(n=>`
           <article class="news-row">
-            <div class="nthumb" aria-hidden="true"></div>
+            <div class="nthumb" aria-hidden="true"
+      style="${n.thumb ? `background-image:url('${n.thumb}');background-size:cover;background-position:center` : ''}"></div>
             <div>
               <div class="newssite">${faviconHTML(n.source||"Vuku Haber")}<span>${escapeHTML(n.source||"Vuku Haber")}</span> · <span>${escapeHTML(n.location||"")}</span> · <span>${timeAgo(n.published_at)}</span></div>
               <h3 class="news-h" style="font-size:18px">${escapeHTML(n.title)}</h3>
