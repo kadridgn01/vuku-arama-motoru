@@ -315,7 +315,7 @@ async function render(){
   document.querySelectorAll(".tab").forEach(el=>el.classList.toggle("active", el.dataset.kind===kind));
 
   let data={items:[]};
-  try{ data = await fetch("./search-data.json?v=7").then(r=>r.json()); }catch(_){}
+  try{ data = await fetch("./search-data.json?v=8").then(r=>r.json()); }catch(_){}
   window.__allItems = data.items || [];
 
   // rank + ensure pool
