@@ -103,7 +103,9 @@
 <!-- HOME -->
 <section id="home" class="home">
   <div class="inner">
-    <div class="biglogo">Vuku</div>
+    <a class="biglogo" href="/" aria-label="Vuku">
+  <img src="assets/logo.png" alt="Vuku" />
+</a>
     <form id="homeForm" class="bigsearch">
       <input id="homeQ" placeholder="Ara…" autocomplete="on" />
       <button class="sbtn" type="submit">Ara</button>
@@ -115,11 +117,17 @@
     </div>
   </div>
 </section>
+  
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
 
 <!-- RESULTS -->
 <header id="topbar" class="topbar">
   <div class="topwrap">
-    <div class="glogo" onclick="goHome()">Vuku</div>
+   <a class="brand" href="/" onclick="goHome();return false" aria-label="Vuku">
+  <img src="assets/logo.png" alt="Vuku" />
+</a>
     <form id="barForm" class="searchwrap">
       <input id="barQ" placeholder="Ara…" />
       <button class="sbtn" type="submit">Ara</button>
